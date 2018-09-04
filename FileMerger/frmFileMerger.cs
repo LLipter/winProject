@@ -96,6 +96,9 @@ namespace FileMerger
         {
             // saveFileDialog.InitialDirectory = Environment.SpecialFolder.DesktopDirectory.ToString();
 
+            if (lsbSelectedFiles.Items.Count == 0)
+                return;
+
             if(saveFileDialog.ShowDialog() != DialogResult.OK)
             {
                 return;
