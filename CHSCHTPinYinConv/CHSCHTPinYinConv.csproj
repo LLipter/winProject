@@ -33,13 +33,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ChineseConverter">
-      <HintPath>.\ChineseConverter.dll</HintPath>
+      <HintPath>..\ChineseConverter.dll</HintPath>
     </Reference>
     <Reference Include="ChnCharInfo">
-      <HintPath>.\ChnCharInfo.dll</HintPath>
+      <HintPath>..\ChnCharInfo.dll</HintPath>
     </Reference>
     <Reference Include="DotNetSpeech">
-      <HintPath>.\DotNetSpeech.dll</HintPath>
+      <HintPath>..\DotNetSpeech.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
