@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -141,6 +142,18 @@ namespace FileMerger
             }
 
             fs_dest.Close();
+
+            Process.Start(filepath);
+        }
+
+        private void btnOpenFile_Click(object sender, EventArgs e)
+        {
+
+            if (lsbfiles.SelectedIndex == -1)
+                return;
+
+            string filepath = lsbfiles.Items[lsbfiles.SelectedIndex].ToString();
+            Process.Start(filepath);
         }
     }
 }

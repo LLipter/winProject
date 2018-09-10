@@ -45,6 +45,7 @@
             this.btnMoveDownward = new System.Windows.Forms.Button();
             this.btnMerge = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.btnOpenFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnChooseDir
@@ -184,11 +185,22 @@
             this.btnMerge.UseVisualStyleBackColor = true;
             this.btnMerge.Click += new System.EventHandler(this.btnMerge_Click);
             // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Location = new System.Drawing.Point(624, 117);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(127, 23);
+            this.btnOpenFile.TabIndex = 15;
+            this.btnOpenFile.Text = "Open File";
+            this.btnOpenFile.UseVisualStyleBackColor = true;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
+            // 
             // frmFileMerger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(763, 502);
+            this.Controls.Add(this.btnOpenFile);
             this.Controls.Add(this.btnMerge);
             this.Controls.Add(this.btnMoveDownward);
             this.Controls.Add(this.btnMoveUpward);
@@ -229,6 +241,7 @@
         private System.Windows.Forms.Button btnMoveDownward;
         private System.Windows.Forms.Button btnMerge;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button btnOpenFile;
     }
 }
 
