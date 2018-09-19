@@ -19,7 +19,7 @@ namespace CSharpLibrary
             int result = 0;
             foreach(int i in array)
             {
-                result += array[i];
+                result += i;
             }
             return result;
         }

@@ -5,4 +5,10 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="CSharpLibrary">
+      <HintPath>..\..\CSharpLibrary\CSharpLibrary\bin\Debug\netstandard2.0\CSharpLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
