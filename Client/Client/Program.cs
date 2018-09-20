@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using CSharpLibrary;
+using Microsoft.Win32;
 
 namespace Client
 {
@@ -32,6 +33,9 @@ namespace Client
             Console.WriteLine("Invoke method in C++ library!");
             Console.WriteLine(getMax(1, 2));
 
+
+            Console.WriteLine("Registry Manipulation!");
+            RegistryKey hklm = Registry.LocalMachine;
 
 
         }
