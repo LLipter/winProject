@@ -32,15 +32,35 @@ namespace Client
             parameters[0] = array;
             sum = (int)mi.Invoke(o, parameters);
             Console.WriteLine("Sum of array = {0}", sum);
-
+            Console.WriteLine();
 
 
             Console.WriteLine("Invoke method in C++ library!");
             Console.WriteLine(getMax(1, 2));
+            Console.WriteLine();
 
+
+            // Referece
+            // https://www.cnblogs.com/boby-/p/4724255.html
 
             Console.WriteLine("Registry Manipulation!");
             RegistryKey hklm = Registry.LocalMachine;
+            Console.WriteLine("Create Key");
+            Console.WriteLine(hklm);
+            RegistryKey hkSoftWare = hklm.CreateSubKey(@"SOFTWARE\test");
+            hklm.Close();
+            hkSoftWare.Close();
+
+            Console.WriteLine("Open Key");
+            hklm = Registry.LocalMachine;
+            hkSoftWare = hklm.OpenSubKey(@"SOFTWARE\test", true);
+            hklm.Close();
+            hkSoftWare.Close();
+
+            Console.WriteLine("Delete Key");
+            hklm = Registry.LocalMachine;
+            hklm.DeleteSubKey(@"SOFTWARE\test", true);
+            hklm.Close();
 
 
         }
