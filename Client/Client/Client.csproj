@@ -5,6 +5,11 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+
   <ItemGroup>
     <Reference Include="CSharpLibrary">
       <HintPath>..\..\CSharpLibrary\CSharpLibrary\bin\Debug\netstandard2.0\CSharpLibrary.dll</HintPath>
