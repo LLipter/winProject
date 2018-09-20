@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using CSharpLibrary;
 using Microsoft.Win32;
 
+
 namespace Client
 {
     class Program
     {
-        [DllImport("../../CppLibrary/x64/Release/CppLibrary.dll", EntryPoint = "getMax")]
+        [DllImport("../../../../CppLibrary/Release/CppLibrary.dll", EntryPoint = "getMax")]
         public static extern int getMax(int a, int b);
 
         static void Main(string[] args)
@@ -19,13 +24,13 @@ namespace Client
             Console.WriteLine("Sum of array = {0}", sum);
 
             Console.WriteLine("Invoke method in C# library by loading dynamically!");
-            Assembly a = Assembly.LoadFrom("../../CSharpLibrary/CSharpLibrary/bin/debug/netstandard2.0/CSharpLibrary.dll");
+            Assembly a = Assembly.LoadFrom("../../../../CSharpLibrary/CSharpLibrary/bin/debug/netstandard2.0/CSharpLibrary.dll");
             Type lib = a.GetType("CSharpLibrary.CSMath");
             MethodInfo mi = lib.GetMethod("sum");
             object o = Activator.CreateInstance(lib);
             Object[] parameters = new Object[1];
             parameters[0] = array;
-            sum = (int) mi.Invoke(o, parameters);
+            sum = (int)mi.Invoke(o, parameters);
             Console.WriteLine("Sum of array = {0}", sum);
 
 
