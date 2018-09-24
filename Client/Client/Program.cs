@@ -45,19 +45,44 @@ namespace Client
 
             Console.WriteLine("Registry Manipulation!");
             RegistryKey hklm = Registry.LocalMachine;
-            Console.WriteLine("Create Key");
+            Console.WriteLine("Create Entry");
             Console.WriteLine(hklm);
             RegistryKey hkSoftWare = hklm.CreateSubKey(@"SOFTWARE\test");
             hklm.Close();
             hkSoftWare.Close();
 
-            Console.WriteLine("Open Key");
+            Console.WriteLine("Open Entry");
             hklm = Registry.LocalMachine;
             hkSoftWare = hklm.OpenSubKey(@"SOFTWARE\test", true);
             hklm.Close();
             hkSoftWare.Close();
 
-            Console.WriteLine("Delete Key");
+
+
+
+            Console.WriteLine("Create Key-Value Pair");
+            hklm = Registry.LocalMachine;
+            hkSoftWare = hklm.OpenSubKey(@"SOFTWARE\test",true);
+            hkSoftWare.SetValue("MyKey", "MyValue", RegistryValueKind.String);
+            hklm.Close();
+            hkSoftWare.Close();
+
+            Console.WriteLine("Open Key-Value Pair");
+            hklm = Registry.LocalMachine;
+            hkSoftWare = hklm.OpenSubKey(@"SOFTWARE\test", true);
+            string sValue = hkSoftWare.GetValue("MyKey").ToString();
+            Console.WriteLine(sValue);
+            hklm.Close();
+            hkSoftWare.Close();
+
+            Console.WriteLine("Delete Key-Value Pair");
+            hklm = Registry.LocalMachine;
+            hkSoftWare = hklm.OpenSubKey(@"SOFTWARE\test", true);
+            hkSoftWare.DeleteValue("MyKey", true);
+            hklm.Close();
+            hkSoftWare.Close();
+
+            Console.WriteLine("Delete Entry");
             hklm = Registry.LocalMachine;
             hklm.DeleteSubKey(@"SOFTWARE\test", true);
             hklm.Close();
