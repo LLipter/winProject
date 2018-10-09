@@ -1,0 +1,5 @@
+LIBRARY "CppLibrary"
+
+EXPORTS
+getMax @ 1
+getMin @ 2
