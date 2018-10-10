@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyLib
+namespace COM
 {
 
 
@@ -20,7 +20,7 @@ namespace MyLib
 
     [ComVisible(true)]
     [Guid("63310A03-04C0-43A9-AAA1-6A24727F0B38")]
-    [ProgId("MyLib.MyClass")]
+    [ProgId("COM.MyClass")]
     public class MyClass : IMyClass
     {
         public void Initialize()
