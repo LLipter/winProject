@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _04_COM
+namespace Client
 {
-    public class MyLib
+    class Program
     {
+        static void Main(string[] args)
+        {
+        }
     }
 }
