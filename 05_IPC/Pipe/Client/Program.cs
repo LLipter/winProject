@@ -13,7 +13,7 @@ namespace Client
         static void Main(string[] args)
         {
 
-            NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "testpipe", PipeDirection.Out);
+            NamedPipeClientStream pipeClient = new NamedPipeClientStream("localhost", "testpipe", PipeDirection.Out);
             pipeClient.Connect();
             Console.WriteLine("Connection built");
             StreamWriter sw = new StreamWriter(pipeClient);
