@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sender"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Sender" Height="200" Width="300">
     <Grid>
-        
+        <TextBox Name="txtMsg" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="180" Margin="52,60,61.6,87.4"/>
+        <Button Name="btnSendMsg" Content="Send Message" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Margin="97,105,96.6,46.4"/>
+
     </Grid>
 </Window>
