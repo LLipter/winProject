@@ -9,7 +9,6 @@ namespace ProducerConsumer
 {
     class Program
     {
-
         private static Semaphore empty;
         private static Semaphore full;
         private static Mutex mutex;
@@ -32,10 +31,14 @@ namespace ProducerConsumer
                 }
                 else
                 {
-                    all_produced = true;
-                    mutex.ReleaseMutex();
-                    full.Release();
+                    if (!all_produced)
+                    {
+                        all_produced = true;
+                        full.Release();
+                    }
                     Console.WriteLine(String.Format("{0} quits", Thread.CurrentThread.Name));
+                    mutex.ReleaseMutex();
+                    empty.Release();
                     break;
                 }
                 mutex.ReleaseMutex();
@@ -51,14 +54,13 @@ namespace ProducerConsumer
                 mutex.WaitOne();
                 if (all_produced && buffer.Count == 0)
                 {
+                    Console.WriteLine(String.Format("                                      {0} quits", Thread.CurrentThread.Name));
                     mutex.ReleaseMutex();
                     full.Release();
-                    Console.WriteLine(String.Format("                                      {0} quits", Thread.CurrentThread.Name));
                     break;
                 }
                 int product = buffer.Dequeue();
                 Console.WriteLine(String.Format("                                      product {0} is comsumed by {1}", product, Thread.CurrentThread.Name));
-
                 mutex.ReleaseMutex();
                 empty.Release();
             }
@@ -91,14 +93,9 @@ namespace ProducerConsumer
             }
 
             for (int i = 0; i < producer_no; i++)
-            {
                 producers[i].Join();
-            }
             for (int i = 0; i < comsumer_no; i++)
-            {
                 consumers[i].Join();
-            }
-
 
             Console.WriteLine("End of producer consumer problem");
         }
@@ -108,8 +105,7 @@ namespace ProducerConsumer
             // ProducerConsumer(1, 1, 10, 20);
             // ProducerConsumer(1, 5, 10, 20);
             // ProducerConsumer(5, 1, 10, 20);
-            ProducerConsumer(5, 5, 10, 20);
-
+            ProducerConsumer(5, 5, 10, 50);
         }
 
         
