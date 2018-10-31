@@ -46,7 +46,7 @@ namespace Receiver
             {
                 COPYDATASTRUCT data = (COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(COPYDATASTRUCT)); // 接收封装的消息
                 MessageBox.Show(wParam.ToString());
-                string str = Encoding.ASCII.GetString(data.data);
+                string str = Encoding.Unicode.GetString(data.data);
                 MessageBox.Show(str);
             }
             return hwnd;

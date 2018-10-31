@@ -46,8 +46,8 @@ namespace Sender
             }
 
             COPYDATASTRUCT data = new COPYDATASTRUCT();
-            string msg = "llIPTER";
-            byte[] bytes = Encoding.ASCII.GetBytes(msg);
+            string msg = "中文数据";
+            byte[] bytes = Encoding.Unicode.GetBytes(msg);
             data.data = new byte[MAX_LENGTH];
             for (int i = 0; i < MAX_LENGTH; i++)
                 data.data[i] = i < bytes.Length ? bytes[i] : (byte)0;
