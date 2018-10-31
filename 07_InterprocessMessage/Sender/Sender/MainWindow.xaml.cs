@@ -22,7 +22,7 @@ namespace Sender
     public partial class MainWindow : Window
     {
         [DllImport("User32.dll", EntryPoint = "SendMessage")]
-        private static extern int SendMessage(int hWnd, int Msg, int wParam, int lParam);
+        private static extern int SendMessage(int hWnd, int Msg, int wParam, ref COPYDATASTRUCT lParam);
 
         [DllImport("User32.dll", EntryPoint = "FindWindow")]
         private extern static int FindWindow(string lpClassName, string lpWindowName);
@@ -36,22 +36,30 @@ namespace Sender
 
         private void btnSendMsg_Click(object sender, RoutedEventArgs e)
         {
-            /*
+            
             // 待发送消息
-            string s = "start";
+            string s = "hELLO";
             // 获取目标进程句柄
-            IntPtr hWnd = (IntPtr) FindWindow(null, "Receiver");
+            int hWnd = FindWindow(null, "Receiver");
+            if (hWnd == 0)
+            {
+                MessageBox.Show("cannot find handler");
+                return;
+            }
             // 封装消息
             byte[] sarr = System.Text.Encoding.Default.GetBytes(s);
+            
             int len = sarr.Length;
+            Console.WriteLine(len);
             COPYDATASTRUCT cds2 = new COPYDATASTRUCT();
             cds2.dwData = (IntPtr)0;
             cds2.cbData = len + 1;
             cds2.lpData = s;
             // 发送消息
             SendMessage(hWnd, WM_COPYDATA, 0, ref cds2);
-            */
+            
 
+            /*
             int handler = FindWindow(null, "Receiver");
             if (handler == 0)
             {
@@ -59,10 +67,11 @@ namespace Sender
                 return;
             }
             SendMessage(handler, WM_COPYDATA, 7614, 0);
+            */
         }
     }
 
-    /*
+    
     public class COPYDATASTRUCT
     {
         public IntPtr dwData; // 任意值
@@ -70,5 +79,5 @@ namespace Sender
         [MarshalAs(UnmanagedType.LPStr)]
         public string lpData; // 发送给目标窗口所在进程的数据
     }
-    */
+    
 }
