@@ -27,7 +27,7 @@ namespace Receiver
             InitializeComponent();
         }
 
-        const int WM_COPYDATA = 0x004A;
+        const int WM_COPYDATA = 0x004a;
 
         protected override void OnSourceInitialized(EventArgs e)
         {
@@ -46,7 +46,7 @@ namespace Receiver
             {
                 COPYDATASTRUCT data = (COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(COPYDATASTRUCT)); 
                 // MessageBox.Show(wParam.ToString());
-                string str = Encoding.Default.GetString(data.data,0,(int)wParam);
+                string str = Encoding.UTF8.GetString(data.data,0,(int)wParam);
                 MessageBox.Show(str);
                 lblMsg.Content = "Received Message: " + str;
             }

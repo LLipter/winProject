@@ -27,7 +27,7 @@ namespace Sender
         [DllImport("User32.dll", EntryPoint = "FindWindow")]
         private extern static int FindWindow(string lpClassName, string lpWindowName);
 
-        const int WM_COPYDATA = 0x004A;
+        const int WM_COPYDATA = 0x004a;
 
         public MainWindow()
         {
@@ -45,14 +45,15 @@ namespace Sender
             }
 
             COPYDATASTRUCT data = new COPYDATASTRUCT();
-            byte[] bytes = Encoding.Default.GetBytes(txtMsg.Text);
+            byte[] bytes = Encoding.UTF8.GetBytes(txtMsg.Text);
+            MessageBox.Show(bytes.Length.ToString());
             data.data = new byte[MAX_LENGTH];
             for (int i = 0; i < MAX_LENGTH; i++)
                 data.data[i] = i < bytes.Length ? bytes[i] : (byte)0;
 
             int nSize = Marshal.SizeOf(data);
             IntPtr ptr = Marshal.AllocHGlobal(nSize);
-            Marshal.StructureToPtr(data, ptr, false);
+            Marshal.StructureToPtr(data, ptr, true);
             SendMessage(hWnd, WM_COPYDATA, bytes.Length, ptr);
         }
     }
