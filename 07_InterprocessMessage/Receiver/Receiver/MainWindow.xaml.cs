@@ -28,7 +28,7 @@ namespace Receiver
         }
 
         const int WM_COPYDATA = 0x004A;
-        
+
         protected override void OnSourceInitialized(EventArgs e)
         {
             base.OnSourceInitialized(e);
@@ -44,10 +44,11 @@ namespace Receiver
         {
             if (msg == WM_COPYDATA)
             {
-                COPYDATASTRUCT data = (COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(COPYDATASTRUCT)); // 接收封装的消息
-                MessageBox.Show(wParam.ToString());
-                string str = Encoding.Unicode.GetString(data.data);
+                COPYDATASTRUCT data = (COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(COPYDATASTRUCT)); 
+                // MessageBox.Show(wParam.ToString());
+                string str = Encoding.Default.GetString(data.data,0,(int)wParam);
                 MessageBox.Show(str);
+                lblMsg.Content = "Received Message: " + str;
             }
             return hwnd;
 
@@ -57,7 +58,7 @@ namespace Receiver
     [StructLayout(LayoutKind.Sequential)]
     public class COPYDATASTRUCT
     {
-        const int MAX_LENGTH = 100;
+        const int MAX_LENGTH = 1000;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_LENGTH)]
         public byte[] data;
     }

@@ -34,8 +34,7 @@ namespace Sender
             InitializeComponent();
         }
 
-        const int MAX_LENGTH = 100;
-
+        const int MAX_LENGTH = 1000;
         private void btnSendMsg_Click(object sender, RoutedEventArgs e)
         {
             int hWnd = FindWindow(null, "Receiver");
@@ -46,8 +45,7 @@ namespace Sender
             }
 
             COPYDATASTRUCT data = new COPYDATASTRUCT();
-            string msg = "中文数据";
-            byte[] bytes = Encoding.Unicode.GetBytes(msg);
+            byte[] bytes = Encoding.Default.GetBytes(txtMsg.Text);
             data.data = new byte[MAX_LENGTH];
             for (int i = 0; i < MAX_LENGTH; i++)
                 data.data[i] = i < bytes.Length ? bytes[i] : (byte)0;
@@ -55,14 +53,14 @@ namespace Sender
             int nSize = Marshal.SizeOf(data);
             IntPtr ptr = Marshal.AllocHGlobal(nSize);
             Marshal.StructureToPtr(data, ptr, false);
-            SendMessage(hWnd, WM_COPYDATA, 7614, ptr);
+            SendMessage(hWnd, WM_COPYDATA, bytes.Length, ptr);
         }
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public class COPYDATASTRUCT
     {
-        const int MAX_LENGTH = 100;
+        const int MAX_LENGTH = 1000;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_LENGTH)]
         public byte[] data;
     }
