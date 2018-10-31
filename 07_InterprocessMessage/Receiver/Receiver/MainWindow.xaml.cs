@@ -28,7 +28,6 @@ namespace Receiver
         }
 
         const int WM_COPYDATA = 0x004A;
-
         
         protected override void OnSourceInitialized(EventArgs e)
         {
@@ -40,39 +39,18 @@ namespace Receiver
                 hwndSource.AddHook(new HwndSourceHook(WndProc));
             }
         }
-        
 
         IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            
             if (msg == WM_COPYDATA)
             {
-                object obj = Marshal.PtrToStructure(lParam, typeof(COPYDATASTRUCT));
-                COPYDATASTRUCT cds = (COPYDATASTRUCT)obj; // 接收封装的消息
+                COPYDATASTRUCT cds = (COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(COPYDATASTRUCT)); // 接收封装的消息
                 string rece = cds.lpData; // 获取消息内容
+                MessageBox.Show(wParam.ToString());
                 MessageBox.Show(rece);
-                Console.WriteLine(rece);
             }
             return hwnd;
-            
 
-            /*
-            MessageBox.Show(wParam.ToString());
-            MessageBox.Show(WM_COPYDATA.ToString());
-            return (IntPtr)7614;
-            */
-
-        }
-
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            /*
-            IntPtr hwnd = new WindowInteropHelper(this).Handle;
-            HwndSource hs = HwndSource.FromHwnd(hwnd);
-            hs.AddHook(new HwndSourceHook(WndProc));
-            */
-            
         }
     }
 

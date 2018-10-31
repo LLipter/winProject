@@ -36,38 +36,23 @@ namespace Sender
 
         private void btnSendMsg_Click(object sender, RoutedEventArgs e)
         {
-            
-            // 待发送消息
-            string s = "hELLO";
-            // 获取目标进程句柄
             int hWnd = FindWindow(null, "Receiver");
             if (hWnd == 0)
             {
                 MessageBox.Show("cannot find handler");
                 return;
             }
-            // 封装消息
+
+            string s = "hELLO";
             byte[] sarr = System.Text.Encoding.Default.GetBytes(s);
-            
             int len = sarr.Length;
             Console.WriteLine(len);
             COPYDATASTRUCT cds2 = new COPYDATASTRUCT();
             cds2.dwData = (IntPtr)0;
             cds2.cbData = len + 1;
             cds2.lpData = s;
-            // 发送消息
-            SendMessage(hWnd, WM_COPYDATA, 0, ref cds2);
-            
 
-            /*
-            int handler = FindWindow(null, "Receiver");
-            if (handler == 0)
-            {
-                MessageBox.Show("cannot find handler");
-                return;
-            }
-            SendMessage(handler, WM_COPYDATA, 7614, 0);
-            */
+            SendMessage(hWnd, WM_COPYDATA, 7614, ref cds2);
         }
     }
 
