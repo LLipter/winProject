@@ -22,7 +22,7 @@ namespace Sender
     public partial class MainWindow : Window
     {
         [DllImport("User32.dll", EntryPoint = "SendMessage")]
-        private static extern int SendMessage(int hWnd, int Msg, int wParam, ref COPYDATASTRUCT lParam);
+        private static extern int SendMessage(int hWnd, int Msg, int wParam, IntPtr lParam);
 
         [DllImport("User32.dll", EntryPoint = "FindWindow")]
         private extern static int FindWindow(string lpClassName, string lpWindowName);
@@ -34,6 +34,8 @@ namespace Sender
             InitializeComponent();
         }
 
+        const int MAX_LENGTH = 100;
+
         private void btnSendMsg_Click(object sender, RoutedEventArgs e)
         {
             int hWnd = FindWindow(null, "Receiver");
@@ -43,26 +45,26 @@ namespace Sender
                 return;
             }
 
-            string s = "hELLO";
-            byte[] sarr = System.Text.Encoding.Default.GetBytes(s);
-            int len = sarr.Length;
-            Console.WriteLine(len);
-            COPYDATASTRUCT cds2 = new COPYDATASTRUCT();
-            cds2.dwData = (IntPtr)0;
-            cds2.cbData = len + 1;
-            cds2.lpData = s;
+            COPYDATASTRUCT data = new COPYDATASTRUCT();
+            string msg = "llIPTER";
+            byte[] bytes = Encoding.ASCII.GetBytes(msg);
+            data.data = new byte[MAX_LENGTH];
+            for (int i = 0; i < MAX_LENGTH; i++)
+                data.data[i] = i < bytes.Length ? bytes[i] : (byte)0;
 
-            SendMessage(hWnd, WM_COPYDATA, 7614, ref cds2);
+            int nSize = Marshal.SizeOf(data);
+            IntPtr ptr = Marshal.AllocHGlobal(nSize);
+            Marshal.StructureToPtr(data, ptr, false);
+            SendMessage(hWnd, WM_COPYDATA, 7614, ptr);
         }
     }
 
-    
+    [StructLayout(LayoutKind.Sequential)]
     public class COPYDATASTRUCT
     {
-        public IntPtr dwData; // 任意值
-        public int cbData;    // 指定lpData内存区域的字节数
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string lpData; // 发送给目标窗口所在进程的数据
+        const int MAX_LENGTH = 100;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_LENGTH)]
+        public byte[] data;
     }
     
 }

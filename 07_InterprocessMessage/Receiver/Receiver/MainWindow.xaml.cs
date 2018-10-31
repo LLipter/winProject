@@ -44,10 +44,10 @@ namespace Receiver
         {
             if (msg == WM_COPYDATA)
             {
-                COPYDATASTRUCT cds = (COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(COPYDATASTRUCT)); // 接收封装的消息
-                string rece = cds.lpData; // 获取消息内容
+                COPYDATASTRUCT data = (COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(COPYDATASTRUCT)); // 接收封装的消息
                 MessageBox.Show(wParam.ToString());
-                MessageBox.Show(rece);
+                string str = Encoding.ASCII.GetString(data.data);
+                MessageBox.Show(str);
             }
             return hwnd;
 
@@ -57,9 +57,8 @@ namespace Receiver
     [StructLayout(LayoutKind.Sequential)]
     public class COPYDATASTRUCT
     {
-        public IntPtr dwData; // 任意值
-        public int cbData;    // 指定lpData内存区域的字节数
-        [MarshalAs(UnmanagedType.LPStr)]
-        public string lpData; // 发送给目标窗口所在进程的数据
+        const int MAX_LENGTH = 100;
+        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_LENGTH)]
+        public byte[] data;
     }
 }
