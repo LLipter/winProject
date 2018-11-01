@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Sender" Height="200" Width="300">
     <Grid>
-        <TextBox Name="txtMsg" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="Write Message Here" VerticalAlignment="Center" Width="180" Margin="52,60,61.6,87.4" TextAlignment="Center"/>
-        <Button Name="btnSendMsg" Content="Send Message" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Margin="97,105,96.6,37.4" Click="btnSendMsg_Click" Height="28"/>
+        <TextBox Name="txtMsg" HorizontalAlignment="Center" Height="26" TextWrapping="Wrap" Text="Write Message Here" VerticalAlignment="Center" Width="180" Margin="52,57,61.6,87.4" TextAlignment="Center"/>
+        <Button Name="btnSendMsg" Content="Send Message" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Margin="95,101,98.6,35.4" Click="btnSendMsg_Click" Height="34"/>
 
     </Grid>
 </Window>

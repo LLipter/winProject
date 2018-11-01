@@ -42,13 +42,22 @@ namespace Receiver
 
         IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
+            Console.WriteLine(msg.ToString());
             if (msg == WM_COPYDATA)
             {
+                
                 COPYDATASTRUCT data = (COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(COPYDATASTRUCT)); 
                 // MessageBox.Show(wParam.ToString());
-                string str = Encoding.UTF8.GetString(data.data,0,(int)wParam);
+                string str = Encoding.Default.GetString(data.data,0,(int)wParam);
                 MessageBox.Show(str);
                 lblMsg.Content = "Received Message: " + str;
+                
+
+                /*
+                string data = Marshal.PtrToStringAnsi(lParam);
+                lblMsg.Content = "Received Message: " + data;
+                MessageBox.Show(data);
+                */
             }
             return hwnd;
 
@@ -58,7 +67,7 @@ namespace Receiver
     [StructLayout(LayoutKind.Sequential)]
     public class COPYDATASTRUCT
     {
-        const int MAX_LENGTH = 1000;
+        const int MAX_LENGTH = 100;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_LENGTH)]
         public byte[] data;
     }

@@ -22,10 +22,10 @@ namespace Sender
     public partial class MainWindow : Window
     {
         [DllImport("User32.dll", EntryPoint = "SendMessage")]
-        private static extern int SendMessage(int hWnd, int Msg, int wParam, IntPtr lParam);
+        private static extern int SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("User32.dll", EntryPoint = "FindWindow")]
-        private extern static int FindWindow(string lpClassName, string lpWindowName);
+        private extern static IntPtr FindWindow(string lpClassName, string lpWindowName);
 
         const int WM_COPYDATA = 0x004a;
 
@@ -34,34 +34,43 @@ namespace Sender
             InitializeComponent();
         }
 
-        const int MAX_LENGTH = 1000;
+        const int MAX_LENGTH = 100;
         private void btnSendMsg_Click(object sender, RoutedEventArgs e)
         {
-            int hWnd = FindWindow(null, "Receiver");
-            if (hWnd == 0)
+            IntPtr hWnd = FindWindow(null, "Receiver");
+            if (hWnd == IntPtr.Zero)
             {
                 MessageBox.Show("cannot find handler");
                 return;
             }
-
+            // MessageBox.Show(IntPtr.Size.ToString());
+            
             COPYDATASTRUCT data = new COPYDATASTRUCT();
-            byte[] bytes = Encoding.UTF8.GetBytes(txtMsg.Text);
-            MessageBox.Show(bytes.Length.ToString());
+            byte[] bytes = Encoding.Default.GetBytes(txtMsg.Text);
+            // MessageBox.Show(bytes.Length.ToString());
             data.data = new byte[MAX_LENGTH];
-            for (int i = 0; i < MAX_LENGTH; i++)
-                data.data[i] = i < bytes.Length ? bytes[i] : (byte)0;
+            int len = MAX_LENGTH < bytes.Length ? MAX_LENGTH : bytes.Length;
+            for (int i = 0; i < len; i++)
+                data.data[i] = bytes[i];
 
             int nSize = Marshal.SizeOf(data);
             IntPtr ptr = Marshal.AllocHGlobal(nSize);
             Marshal.StructureToPtr(data, ptr, true);
-            SendMessage(hWnd, WM_COPYDATA, bytes.Length, ptr);
+            int res = SendMessage(hWnd, WM_COPYDATA, new IntPtr(bytes.Length), ptr);
+            // MessageBox.Show(res.ToString());
+            
+
+            /*
+            int res = SendMessage(hWnd, WM_COPYDATA, new IntPtr(0), Marshal.StringToHGlobalAnsi(txtMsg.Text));
+            */
+
         }
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public class COPYDATASTRUCT
     {
-        const int MAX_LENGTH = 1000;
+        const int MAX_LENGTH = 100;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_LENGTH)]
         public byte[] data;
     }

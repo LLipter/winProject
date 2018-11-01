@@ -8,8 +8,9 @@
         Title="Receiver" Height="200" Width="300">
     <Grid>
         <Label Name="lblMsg" Content="Received Message: " HorizontalAlignment="Left" VerticalAlignment="Top" 
-               Margin="10,70,0,0" 
-               Width="274"/>
+               Margin="10,65,0,0" 
+               Width="274"
+               HorizontalContentAlignment="Center" Height="31"/>
 
     </Grid>
 </Window>
