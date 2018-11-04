@@ -29,86 +29,32 @@ namespace Receiver
 
         const int WM_COPYDATA = 0x004a;
 
-        protected override void OnSourceInitialized(EventArgs e)
-        {
-            base.OnSourceInitialized(e);
-            HwndSource hwndSource = PresentationSource.FromVisual(this) as HwndSource;
-            if (hwndSource != null)
-            {
-                IntPtr handle = hwndSource.Handle;
-                hwndSource.AddHook(new HwndSourceHook(WndProc));
-            }
-        }
-
-        private byte[] bytes;
-        private int index;
-
         IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
-            Console.WriteLine(msg.ToString());
             if (msg == WM_COPYDATA)
             {
-                // Solution 1 (failed to pass message larger than 8 bytes)
-                /*
-                COPYDATASTRUCT data = (COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(COPYDATASTRUCT)); 
-                // MessageBox.Show(wParam.ToString());
-                string str = Encoding.Default.GetString(data.data,0,(int)wParam);
-                MessageBox.Show(str);
-                lblMsg.Content = "Received Message: " + str;
-                */
-
-                // Solution 2 (failed to pass message larger than 4 bytes)
-                /*
-                string data = Marshal.PtrToStringAnsi(lParam);
-                lblMsg.Content = "Received Message: " + data;
-                MessageBox.Show(data);
-                */
-
-                // Solution 3 (also failed to pass message larger than 4 bytes)
-                /*
-                byte[] bytes = new Byte[(int)wParam];
-                Marshal.Copy(lParam, bytes, 0, (int)wParam);
-                string data = Encoding.Default.GetString(bytes);
-                lblMsg.Content = "Received Message: " + data;
-                MessageBox.Show(data);
-                */
-
-                // Solution 4, try solution 1-3 multiplu times. Only pass a small piece of message in a single message
-                // failed again, and I don't know why
-                /*
-                // signal of starting transmitting
-                if (wParam == (IntPtr)999 && lParam != IntPtr.Zero)
-                {
-                    bytes = new byte[(int)lParam];
-                    index = 0;
-                }
-                // signal of ending transmitting
-                else if (wParam == (IntPtr)999 && lParam == (IntPtr)999)
-                {
-                    string data = Encoding.Default.GetString(bytes);
-                    lblMsg.Content = "Received Message: " + data;
-                    MessageBox.Show(data);
-                }
-                else
-                {
-                    Marshal.Copy(lParam, bytes, index, (int)wParam);
-                    index += (int)wParam;
-                }
-                */
-
-
-
+                COPYDATASTRUCT cds = (COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(COPYDATASTRUCT));
+                lblMsg.Content = "Received Message: " + cds.lpData;
             }
             return hwnd;
 
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            HwndSource hWndSource;
+            WindowInteropHelper wih = new WindowInteropHelper(this);
+            hWndSource = HwndSource.FromHwnd(wih.Handle);
+            hWndSource.AddHook(WndProc);
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public class COPYDATASTRUCT
+    public struct COPYDATASTRUCT
     {
-        const int MAX_LENGTH = 100;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = MAX_LENGTH)]
-        public byte[] data;
+        public IntPtr dwData;
+        public int cbData;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string lpData;
     }
 }
