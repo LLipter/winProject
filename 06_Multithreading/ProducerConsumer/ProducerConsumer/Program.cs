@@ -21,7 +21,10 @@ namespace ProducerConsumer
         {
             while (true)
             {
-                empty.WaitOne();
+                while (!empty.WaitOne(10))
+                {
+                    Console.WriteLine(String.Format("{0}: buffer is full", Thread.CurrentThread.Name));
+                }
                 mutex.WaitOne();
                 if (current_no < product_no)
                 {
@@ -50,7 +53,11 @@ namespace ProducerConsumer
         {
             while (true)
             {
-                full.WaitOne();
+
+                while (!full.WaitOne(10))
+                {
+                    Console.WriteLine(String.Format("                                      {0}: buffer is empty", Thread.CurrentThread.Name));
+                }
                 mutex.WaitOne();
                 if (all_produced && buffer.Count == 0)
                 {
@@ -105,7 +112,7 @@ namespace ProducerConsumer
             // ProducerConsumer(1, 1, 10, 20);
             // ProducerConsumer(1, 5, 10, 20);
             // ProducerConsumer(5, 1, 10, 20);
-            ProducerConsumer(5, 5, 10, 50);
+            ProducerConsumer(1, 20, 10, 50);
         }
 
         
