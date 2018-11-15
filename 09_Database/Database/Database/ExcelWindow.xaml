@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database"
         mc:Ignorable="d"
-        Title="ExcelWindow" Height="300" Width="300">
+        Title="ExcelWindow" Height="401.086" Width="730.436" ResizeMode="NoResize">
     <Grid>
-        
+        <Button Content="Choose File" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"
+                Name="btnChooseFile" Click="btnChooseFile_Click" Margin="87,13,0,0"/>
+        <Button Content="Load Sheet" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75"
+                Name="btnLoadSheet" Click="btnLoadSheet_Click" Margin="87,49,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="bilibili_video" VerticalAlignment="Top" Width="120" Margin="188,44,0,0"
+                 Name="txtSheetName"
+                 VerticalContentAlignment="Center"/>
+        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,10,0,0"
+               Name="lblFilePath" Width="120"
+               VerticalContentAlignment="Center"/>
+        <DataGrid HorizontalAlignment="Left" Height="284" VerticalAlignment="Top" Width="704" Margin="10,77,0,0"
+                  Name="grdData"/>
+        <Button Content="Remove" HorizontalAlignment="Left" Margin="496,9,0,0" VerticalAlignment="Top" Width="75"
+                Name="btnRemoveLine" Click="btnRemoveLine_Click"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="496,44,0,0" VerticalAlignment="Top" Width="75"
+                Name="btnSave" Click="btnSave_Click"/>
+
     </Grid>
 </Window>
