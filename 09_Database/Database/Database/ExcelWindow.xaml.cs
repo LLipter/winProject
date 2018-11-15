@@ -10,25 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Database
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// ExcelWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ExcelWindow : Window
     {
-        public MainWindow()
+        public ExcelWindow()
         {
             InitializeComponent();
-        }
-
-        private void btnExcel_Click(object sender, RoutedEventArgs e)
-        {
-            ExcelWindow excelWindow = new ExcelWindow();
-            excelWindow.ShowDialog();
         }
     }
 }
