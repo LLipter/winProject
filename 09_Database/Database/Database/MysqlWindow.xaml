@@ -1,0 +1,45 @@
+﻿<Window x:Class="Database.MysqlWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Database"
+        mc:Ignorable="d"
+        Title="MysqlWindow" Height="419.75" Width="712">
+    <Grid>
+        <Label Content="Host:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,30,0,0"
+               Name="lblHost"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="localhost" VerticalAlignment="Top" Margin="109,35,0,0"
+                   Name="txtHost"/>
+        <Label Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="219,30,0,0"
+            x:Name="lblUsername"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="root" VerticalAlignment="Top" Margin="302,35,0,0"
+                   Name="txtUsername"/>
+        <Label Content="Database:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="422,29,0,0"
+            x:Name="lbldatabase"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="bilibili" VerticalAlignment="Top" Margin="505,34,0,0"
+            x:Name="txtDatabase"/>
+        <Label Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="219,62,0,0"
+            x:Name="lblPassword"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="302,67,0,0" VerticalAlignment="Top" Width="61"
+                     PasswordChar="*"
+                     Password="5720"
+                     Name="txtPassword"/>
+        <Label Content="Table:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="421,62,0,0"
+            x:Name="lblTable"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="video" VerticalAlignment="Top" Margin="505,67,0,0"
+            x:Name="txtTable"/>
+        <Button Content="Connect" HorizontalAlignment="Left" Margin="591,9,0,0" VerticalAlignment="Top" Width="75"
+                Name="btnConnect" Click="btnConnect_Click"/>
+        <DataGrid HorizontalAlignment="Left" Height="277" Margin="10,103,0,0" VerticalAlignment="Top" Width="686"/>
+        <Button Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="591,42,0,0"
+                Name="btnRemove"/>
+        <Button Content="Update" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="591,74,0,0"
+                Name="btnUpdate"/>
+        <Label Content="Port:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,62,0,0"
+            x:Name="lblPort"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="3306" VerticalAlignment="Top" Margin="109,67,0,0"
+            x:Name="txtPort"/>
+
+    </Grid>
+</Window>

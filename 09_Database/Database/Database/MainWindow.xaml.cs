@@ -30,5 +30,11 @@ namespace Database
             ExcelWindow excelWindow = new ExcelWindow();
             excelWindow.ShowDialog();
         }
+
+        private void btnMysql_Click(object sender, RoutedEventArgs e)
+        {
+            MysqlWindow mysqlWindow = new MysqlWindow();
+            mysqlWindow.ShowDialog();
+        }
     }
 }

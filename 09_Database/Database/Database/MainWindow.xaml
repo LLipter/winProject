@@ -9,6 +9,8 @@
     <Grid>
         <Button Content="Excel" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Width="75" Click="btnExcel_Click"
                 Name="btnExcel"/>
+        <Button Content="Mysql" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="206,56,0,0"
+                Name="btnMysql" Click="btnMysql_Click"/>
 
     </Grid>
 </Window>
