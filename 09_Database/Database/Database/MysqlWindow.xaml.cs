@@ -100,6 +100,11 @@ namespace Database
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            if(connStr == string.Empty)
+            {
+                System.Windows.MessageBox.Show("No database connected");
+                return;
+            }
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
                 string sql = "select * from " + txtTable.Text;
