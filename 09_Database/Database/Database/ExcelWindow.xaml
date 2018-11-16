@@ -21,8 +21,8 @@
                   Name="grdData"/>
         <Button Content="Remove" HorizontalAlignment="Left" Margin="496,9,0,0" VerticalAlignment="Top" Width="75"
                 Name="btnRemoveLine" Click="btnRemoveLine_Click"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="496,44,0,0" VerticalAlignment="Top" Width="75"
-                Name="btnSave" Click="btnSave_Click"/>
+        <Button Content="Update" HorizontalAlignment="Left" Margin="496,44,0,0" VerticalAlignment="Top" Width="75"
+                Name="btnUpdate" Click="btnUpdate_Click"/>
 
     </Grid>
 </Window>

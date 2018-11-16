@@ -22,8 +22,8 @@ namespace Database
     public partial class ExcelWindow : Window
     {
         private OpenFileDialog openFileDialog;
-        private string openedFilePath;
-        private string openedFileExtention;
+        private string openedFilePath = string.Empty;
+        private string openedFileExtention = string.Empty;
 
         public ExcelWindow()
         {
@@ -120,8 +120,13 @@ namespace Database
 
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            if (openedFilePath == string.Empty)
+            {
+                System.Windows.MessageBox.Show("No sheet opened!");
+                return;
+            }
             // remove original file
             try
             {
@@ -171,7 +176,7 @@ namespace Database
                 con.Close();
             }
 
-            System.Windows.MessageBox.Show("save successfully");
+            System.Windows.MessageBox.Show("update successfully");
         }
     }
 }
