@@ -12,17 +12,33 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OpenCvSharp;
+
 
 namespace ImageMosaic
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Mat src = new Mat("C:\\Users\\99645\\Desktop\\1.png", ImreadModes.GrayScale);
+            // Mat src = Cv2.ImRead("lenna.png", ImreadModes.GrayScale);
+            Mat dst = new Mat();
+
+            Cv2.Canny(src, dst, 50, 200);
+            using (new OpenCvSharp.Window("src image", src))
+            using (new OpenCvSharp.Window("dst image", dst))
+            {
+                Cv2.WaitKey();
+            }
         }
     }
 }
