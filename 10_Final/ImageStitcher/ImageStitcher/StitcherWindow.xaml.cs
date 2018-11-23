@@ -148,23 +148,26 @@ namespace ImageStitcher
             // The size of such matrix is 3x3, which can represents every possible matrix transformation in 2-D plane.
             Mat homo = Cv2.FindHomography(InputArray.Create<Point2f>(imagePoints2), InputArray.Create<Point2f>(imagePoints1));
 
-            // calculate the transformed position of the second image's conor
+            // calculate the transformed location of the second image's conor
             // use this value to calculate the size of result image
             Point2f[] transfromedConors = transfromConors(src2Color.Size(), homo);
 
-            // if the second image is on the left or up side of the first image
+            // if the second image is on the left or up side of the first image, X or Y coordinate may be negative
             // exchange them and recompute the homography affine matrix
             for (int i = 0; i < 4; i++)
             {
                 if (transfromedConors[i].X < 0 || transfromedConors[i].Y < 0)
                 {
                     Mat temp;
+                    // exchange colorful source images
                     temp = src1Color;
                     src1Color = src2Color;
                     src2Color = temp;
+                    // exchange gray source images
                     temp = src1Gray;
                     src1Gray = src2Gray;
                     src2Gray = temp;
+                    // recompute affine matrix and transfomed conor location
                     homo = Cv2.FindHomography(InputArray.Create<Point2f>(imagePoints1), InputArray.Create<Point2f>(imagePoints2));
                     transfromedConors = transfromConors(src2Color.Size(), homo);
                     break;
@@ -182,6 +185,8 @@ namespace ImageStitcher
                     maxHeight = transfromedConors[i].Y;
             }
             OpenCvSharp.Size resultSize = new OpenCvSharp.Size(maxWidth, maxHeight);
+
+            // the position that the first image should be copied to in the final result
             int src1StartPositonY = 0;
             int src1StartPositonX = 0;
 
@@ -199,6 +204,12 @@ namespace ImageStitcher
             }
             if (shouldShiftX)
             {
+                /*
+                 * matrix for shifting algong x-axis
+                 * 1 0 d
+                 * 0 1 0
+                 * 0 0 1
+                 */
                 Mat shiftMatrix = new Mat(3, 3, homo.Type());
                 shiftMatrix.Set<double>(0, 0, 1);
                 shiftMatrix.Set<double>(0, 1, 0);
@@ -229,6 +240,12 @@ namespace ImageStitcher
             }
             if (shouldShiftY)
             {
+                /*
+                 * matrix for shifting algong y-axis
+                 * 1 0 0
+                 * 0 1 d
+                 * 0 0 1
+                 */
                 Mat shiftMatrix = new Mat(3, 3, homo.Type());
                 shiftMatrix.Set<double>(0, 0, 1);
                 shiftMatrix.Set<double>(0, 1, 0);
