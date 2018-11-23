@@ -135,7 +135,6 @@ namespace ImageStitcher
             }
 
             // visiualize match result
-            
             Mat matchImg = new Mat();
             Cv2.DrawMatches(src1Color, keypoints1, src2Color, keypoints2, bestMatches, matchImg, Scalar.All(-1), Scalar.All(-1), null, DrawMatchesFlags.NotDrawSinglePoints);
             using (new OpenCvSharp.Window("SIFT matching", WindowMode.Normal, matchImg))
@@ -143,7 +142,6 @@ namespace ImageStitcher
                 Cv2.WaitKey();
             }
             
-
             // Get homographic matrix that represents a transformation.
             // The size of such matrix is 3x3, which can represents every possible matrix transformation in 2-D plane.
             Mat homo = Cv2.FindHomography(InputArray.Create<Point2f>(imagePoints2), InputArray.Create<Point2f>(imagePoints1));
@@ -151,24 +149,28 @@ namespace ImageStitcher
             // calculate the transformed position of the second image's conor
             // use this value to calculate the size of result image
             Point2f[] transfromedConors = transfromConors(src2Color.Size(), homo);
-            if (transfromedConors[0].X < 0 || transfromedConors[1].X < 0 ||
-                transfromedConors[2].X < 0 || transfromedConors[3].X < 0 ||
-                transfromedConors[0].Y < 0 || transfromedConors[1].Y < 0 ||
-                transfromedConors[2].Y < 0 || transfromedConors[3].Y < 0)
+            
+            // if the second image is on the left or up side of the first image
+            // exchange them and recompute the homography map matrix
+            for (int i = 0; i < 4; i++)
             {
-                // if the second image is on the left or up side of the first image
-                // exchange them and recompute the homography map matrix
-                Mat temp;
-                temp = src1Color;
-                src1Color = src2Color;
-                src2Color = temp;
-                temp = src1Gray;
-                src1Gray = src2Gray;
-                src2Gray = temp;
-                homo = Cv2.FindHomography(InputArray.Create<Point2f>(imagePoints1), InputArray.Create<Point2f>(imagePoints2));
-                transfromedConors = transfromConors(src2Color.Size(), homo);
+                if (transfromedConors[i].X < 0 || transfromedConors[i].Y < 0)
+                {
+                    Mat temp;
+                    temp = src1Color;
+                    src1Color = src2Color;
+                    src2Color = temp;
+                    temp = src1Gray;
+                    src1Gray = src2Gray;
+                    src2Gray = temp;
+                    homo = Cv2.FindHomography(InputArray.Create<Point2f>(imagePoints1), InputArray.Create<Point2f>(imagePoints2));
+                    transfromedConors = transfromConors(src2Color.Size(), homo);
+                    break;
+                }
+                    
             }
 
+            // make sure the result image is large enough
             double maxWidth = src1Color.Width;
             double maxHeight = src1Color.Height;
             for(int i = 0; i < 4; i++)
@@ -179,17 +181,18 @@ namespace ImageStitcher
                     maxHeight = transfromedConors[i].Y;
             }
             OpenCvSharp.Size resultSize = new OpenCvSharp.Size(maxWidth, maxHeight);
+
             Mat result = new Mat();
             Cv2.WarpPerspective(src2Color, result, homo, resultSize);
             src1Color.CopyTo(new Mat(result, new OpenCvSharp.Rect(0, 0, src1Gray.Cols, src1Gray.Rows)));
             result.SaveImage((string)lblSavePath.Content);
 
-            OpenCvSharp.Window resultWindow = new OpenCvSharp.Window("Stitch Result",WindowMode.Normal, result);
+            OpenCvSharp.Window resultWindow = new OpenCvSharp.Window("Stitch Result", WindowMode.Normal, result);
 
             MessageBox.Show("ok", "Save result");
         }
 
-        static Point2f[] transfromConors(OpenCvSharp.Size size, Mat homo)
+        private static Point2f[] transfromConors(OpenCvSharp.Size size, Mat homo)
         {
             Point2f leftTop = new Point2f(0, 0);
             Point2f leftBottom = new Point2f(0, size.Height);
