@@ -1,24 +1,24 @@
-﻿<Window x:Class="ImageStitcher.Stitcher"
+﻿<Window x:Class="ImageStitcher.StitcherWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageStitcher"
         mc:Ignorable="d"
-        Title="Stitcher" Height="300" Width="502.667">
+        Title="Stitcher" Height="300" Width="502.667" ResizeMode="NoResize">
     <Grid>
         <Button Content="Choose First Image" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,53,0,0"
                 Name="btnChooseImage1" Click="btnChooseImage1_Click"/>
         <Button Content="Choose Second Image" HorizontalAlignment="Left" Margin="22,98,0,0" VerticalAlignment="Top" Width="139"
                 Name="btnChooseImage2" Click="btnChooseImage2_Click"/>
         <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="197,53,0,0"
-               Name="lblPath1"/>
+               Name="lblPath1" Width="270"/>
         <Label Content="" HorizontalAlignment="Left" Margin="197,95,0,0" VerticalAlignment="Top"
-               Name="lblPath2"/>
+               Name="lblPath2" Width="270"/>
         <Button Content="Save As" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,143,0,0"
                 Name="btnSave" Click="btnSave_Click"/>
         <Label Content="" HorizontalAlignment="Left" Margin="197,139,0,0" VerticalAlignment="Top"
-               Name="lblSavePath"/>
+               Name="lblSavePath" Width="270"/>
         <Button Content="Stitch Together" HorizontalAlignment="Left" VerticalAlignment="Top" Width="137" Margin="170,199,0,0"
                 Name="btnStich" Click="btnStich_Click"/>
 

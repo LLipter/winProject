@@ -19,12 +19,12 @@ namespace ImageStitcher
     /// <summary>
     /// Stitcher.xaml 的交互逻辑
     /// </summary>
-    public partial class Stitcher : System.Windows.Window
+    public partial class StitcherWindow : System.Windows.Window
     {
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
 
-        public Stitcher()
+        public StitcherWindow()
         {
             InitializeComponent();
             openFileDialog = new System.Windows.Forms.OpenFileDialog();

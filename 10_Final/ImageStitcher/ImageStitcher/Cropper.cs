@@ -32,6 +32,7 @@ namespace ImageStitcher
 
                 CvMouseCallback onMouse = new CvMouseCallback(mouseCallback);
                 CroppingWindow.SetMouseCallback(onMouse);
+                Cv2.WaitKey();
             }
             return srcImage;
         }

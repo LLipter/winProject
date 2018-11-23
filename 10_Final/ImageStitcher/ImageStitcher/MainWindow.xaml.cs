@@ -28,26 +28,18 @@ namespace ImageStitcher
 
         private void btnStitcher_Click(object sender, RoutedEventArgs e)
         {
-            Stitcher stitcher = new Stitcher();
+            StitcherWindow stitcher = new StitcherWindow();
+            this.Hide();
             stitcher.ShowDialog();
+            this.Show();
         }
 
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnCropper_Click(object sender, RoutedEventArgs e)
         {
-            Cropper cropper = new Cropper("C:\\Users\\99645\\Desktop\\1.png");
-            try
-            {
-                cropper.Show();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("File open error", "Error");
-                return;
-            }
-            
+            CropperWindow cropper = new CropperWindow();
+            this.Hide();
+            cropper.ShowDialog();
+            this.Show();
         }
-
-
     }
 }
