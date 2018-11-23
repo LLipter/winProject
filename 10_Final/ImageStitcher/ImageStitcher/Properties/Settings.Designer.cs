@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ImageMosaic.Properties
+namespace ImageStitcher.Properties
 {
 
 
