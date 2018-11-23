@@ -32,7 +32,7 @@ namespace ImageStitcher
             openFileDialog.FilterIndex = 0;
 
             saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            saveFileDialog.Filter = "image files(*.jpg)| *.jpg;*.jpeg";
+            saveFileDialog.Filter = "image files(*.jpg)| *.jpg;*.jpeg | PNG file(*.png)| *.png";
             saveFileDialog.FilterIndex = 0;
         }
 
