@@ -9,6 +9,7 @@
     <Grid>
         <Button Content="Stitcher" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="147,125,0,0"
                 Name="btnStitcher" Click="btnStitcher_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="326,80,0,0" Click="Button_Click"/>
 
     </Grid>
 </Window>

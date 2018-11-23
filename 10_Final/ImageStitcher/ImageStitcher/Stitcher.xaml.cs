@@ -187,18 +187,21 @@ namespace ImageStitcher
             src1Color.CopyTo(new Mat(result, new OpenCvSharp.Rect(0, 0, src1Gray.Cols, src1Gray.Rows)));
             result.SaveImage((string)lblSavePath.Content);
 
-            OpenCvSharp.Window resultWindow = new OpenCvSharp.Window("Stitch Result", WindowMode.Normal, result);
+            using (new OpenCvSharp.Window("Stitch Result", WindowMode.Normal, result))
+            {
+                MessageBox.Show("ok", "Save result");
+            }
 
-            MessageBox.Show("ok", "Save result");
+           
         }
 
         private static Point2f[] transfromConors(OpenCvSharp.Size size, Mat homo)
         {
             Point2f leftTop = new Point2f(0, 0);
-            Point2f leftBottom = new Point2f(0, size.Height);
-            Point2f rightTop = new Point2f(size.Width, 0);
-            Point2f rightBottom = new Point2f(size.Width, size.Height);
-            Point2f[] conors = { leftTop, leftBottom, rightTop, rightBottom };
+            Point2f leftBottom = new Point2f(0, size.Height-1);
+            Point2f rightTop = new Point2f(size.Width-1, 0);
+            Point2f rightBottom = new Point2f(size.Width-1, size.Height-1);
+            Point2f[] conors = { leftTop, leftBottom, rightTop, rightBottom};
             return Cv2.PerspectiveTransform(conors, homo);
         }
     }
