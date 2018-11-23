@@ -67,19 +67,19 @@ namespace ImageStitcher
         {
             if((string)lblPath1.Content == string.Empty)
             {
-                MessageBox.Show("Please choose the first image");
+                MessageBox.Show("Please choose the first image","Error");
                 return;
             }
 
             if ((string)lblPath2.Content == string.Empty)
             {
-                MessageBox.Show("Please choose the second image");
+                MessageBox.Show("Please choose the second image", "Error");
                 return;
             }
 
             if ((string)lblSavePath.Content == string.Empty)
             {
-                MessageBox.Show("Please choose save location");
+                MessageBox.Show("Please choose save location", "Error");
                 return;
             }
 
@@ -166,7 +166,9 @@ namespace ImageStitcher
             src1Color.CopyTo(new Mat(result, new OpenCvSharp.Rect(0, 0, src1Gray.Cols, src1Gray.Rows)));
             result.SaveImage((string)lblSavePath.Content);
 
-            MessageBox.Show("ok");
+            OpenCvSharp.Window resultWindow = new OpenCvSharp.Window("Stitch Result",WindowMode.AutoSize, result);
+
+            MessageBox.Show("ok", "Save result");
         }
     }
 }
