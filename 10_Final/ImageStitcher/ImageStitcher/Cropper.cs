@@ -34,7 +34,8 @@ namespace ImageStitcher
                 CroppingWindow.SetMouseCallback(onMouse);
                 Cv2.WaitKey();
             }
-            return srcImage;
+            // seems that srcImage will be released by GC, so I must return a copy of it
+            return srcImage.Clone();
         }
 
         private void mouseCallback(MouseEvent e, int x, int y, MouseEvent args, IntPtr data)
@@ -51,8 +52,8 @@ namespace ImageStitcher
             if (e == MouseEvent.LButtonUp)
             {
                 up = true;
-                conor2.X = Math.Min(x, srcImage.Width - 1);
-                conor2.Y = Math.Min(y, srcImage.Height - 1);
+                conor2.X = Math.Max(0, Math.Min(x, srcImage.Width - 1));
+                conor2.Y = Math.Max(0, Math.Min(y, srcImage.Height - 1));
             }
 
             // Update the box showing the selected region as the user drags the mouse

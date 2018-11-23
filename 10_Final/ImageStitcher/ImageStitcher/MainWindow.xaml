@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageStitcher"
         mc:Ignorable="d"
-        Title="Image Stitcher" Height="350" Width="525">
+        Title="Image Stitcher" Height="265.084" Width="307.173">
     <Grid>
-        <Button Content="Stitcher" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="147,125,0,0"
+        <Button Content="Stitcher" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="114,81,0,0"
                 Name="btnStitcher" Click="btnStitcher_Click"/>
-        <Button Content="Cropper" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="162,197,0,0"
+        <Button Content="Cropper" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="114,148,0,0"
                 Name="btnCropper" Click="btnCropper_Click"/>
 
     </Grid>

@@ -59,6 +59,8 @@ namespace ImageStitcher
                 croppedImage.SaveImage(saveFileDialog.FileName);
                 saveFileDialog.FileName = "";
             }
+
+            MessageBox.Show("ok", "Save Result");
         }
 
         private void btnCrop_Click(object sender, RoutedEventArgs e)
@@ -74,7 +76,7 @@ namespace ImageStitcher
             {
                 croppedImage = cropper.Show();
             }
-            catch
+            catch(Exception )
             {
                 MessageBox.Show("File open error", "Error");
                 return;
