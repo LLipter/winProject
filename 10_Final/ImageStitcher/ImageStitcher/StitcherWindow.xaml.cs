@@ -139,7 +139,7 @@ namespace ImageStitcher
             // visiualize match result
             Mat matchImg = new Mat();
             Cv2.DrawMatches(src1Color, keypoints1, src2Color, keypoints2, bestMatches, matchImg, Scalar.All(-1), Scalar.All(-1), null, DrawMatchesFlags.NotDrawSinglePoints);
-            using (new OpenCvSharp.Window("SIFT matching", WindowMode.Normal, matchImg))
+            using (new OpenCvSharp.Window("SIFT matching", WindowMode.AutoSize, matchImg))
             {
                 Cv2.WaitKey();
             }
@@ -153,7 +153,7 @@ namespace ImageStitcher
             Point2f[] transfromedConors = transfromConors(src2Color.Size(), homo);
 
             // if the second image is on the left or up side of the first image
-            // exchange them and recompute the homography map matrix
+            // exchange them and recompute the homography affine matrix
             for (int i = 0; i < 4; i++)
             {
                 if (transfromedConors[i].X < 0 || transfromedConors[i].Y < 0)
@@ -169,7 +169,6 @@ namespace ImageStitcher
                     transfromedConors = transfromConors(src2Color.Size(), homo);
                     break;
                 }
-
             }
 
             // make sure the result image is large enough
@@ -183,13 +182,74 @@ namespace ImageStitcher
                     maxHeight = transfromedConors[i].Y;
             }
             OpenCvSharp.Size resultSize = new OpenCvSharp.Size(maxWidth, maxHeight);
+            int src1StartPositonY = 0;
+            int src1StartPositonX = 0;
+
+            // double check
+            // if still some X coordinate is less than 0, do shift operation along x-axis
+            bool shouldShiftX = false;
+            double shiftDistanceX = double.MinValue;
+            for (int i = 0; i < 4; i++)
+            {
+                if (transfromedConors[i].X < 0)
+                {
+                    shouldShiftX = true;
+                    shiftDistanceX = Math.Max(shiftDistanceX, -transfromedConors[i].X);
+                }
+            }
+            if (shouldShiftX)
+            {
+                Mat shiftMatrix = new Mat(3, 3, homo.Type());
+                shiftMatrix.Set<double>(0, 0, 1);
+                shiftMatrix.Set<double>(0, 1, 0);
+                shiftMatrix.Set<double>(0, 2, shiftDistanceX);
+                shiftMatrix.Set<double>(1, 0, 0);
+                shiftMatrix.Set<double>(1, 1, 1);
+                shiftMatrix.Set<double>(1, 2, 0);
+                shiftMatrix.Set<double>(2, 0, 0);
+                shiftMatrix.Set<double>(2, 1, 0);
+                shiftMatrix.Set<double>(2, 2, 1);
+                homo = shiftMatrix * homo;
+                resultSize.Width = resultSize.Width + (int)shiftDistanceX;
+                src1StartPositonX = (int)shiftDistanceX;
+            }
+            
+
+            // double check
+            // if still some Y coordinate is less than 0, do shift operation along y-axis
+            bool shouldShiftY = false;
+            double shiftDistanceY = double.MinValue;
+            for (int i = 0; i < 4; i++)
+            {
+                if (transfromedConors[i].Y < 0)
+                {
+                    shouldShiftY = true;
+                    shiftDistanceY = Math.Max(shiftDistanceY, -transfromedConors[i].Y);
+                }
+            }
+            if (shouldShiftY)
+            {
+                Mat shiftMatrix = new Mat(3, 3, homo.Type());
+                shiftMatrix.Set<double>(0, 0, 1);
+                shiftMatrix.Set<double>(0, 1, 0);
+                shiftMatrix.Set<double>(0, 2, 0);
+                shiftMatrix.Set<double>(1, 0, 0);
+                shiftMatrix.Set<double>(1, 1, 1);
+                shiftMatrix.Set<double>(1, 2, shiftDistanceY);
+                shiftMatrix.Set<double>(2, 0, 0);
+                shiftMatrix.Set<double>(2, 1, 0);
+                shiftMatrix.Set<double>(2, 2, 1);
+                homo = shiftMatrix * homo;
+                resultSize.Height = resultSize.Height + (int)shiftDistanceY;
+                src1StartPositonY = (int)shiftDistanceY;
+            }
 
             Mat result = new Mat();
             Cv2.WarpPerspective(src2Color, result, homo, resultSize);
-            src1Color.CopyTo(new Mat(result, new OpenCvSharp.Rect(0, 0, src1Gray.Cols, src1Gray.Rows)));
+            src1Color.CopyTo(new Mat(result, new OpenCvSharp.Rect(src1StartPositonX, src1StartPositonY, src1Gray.Cols, src1Gray.Rows)));
             result.SaveImage((string)lblSavePath.Content);
 
-            using (new OpenCvSharp.Window("Stitch Result", WindowMode.Normal, result))
+            using (new OpenCvSharp.Window("Stitch Result", WindowMode.AutoSize, result))
             {
                 MessageBox.Show("ok", "Save result");
             }
