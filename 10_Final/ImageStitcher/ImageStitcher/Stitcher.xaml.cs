@@ -20,6 +20,7 @@ namespace ImageStitcher
     public partial class Stitcher : Window
     {
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
 
         public Stitcher()
         {
@@ -27,6 +28,10 @@ namespace ImageStitcher
             openFileDialog = new System.Windows.Forms.OpenFileDialog();
             openFileDialog.Filter = "image files(*.jpg)| *.jpg;*.jpeg";
             openFileDialog.FilterIndex = 0;
+
+            saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            saveFileDialog.Filter = "image files(*.jpg)| *.jpg;*.jpeg";
+            saveFileDialog.FilterIndex = 0;
         }
 
         private void btnChooseImage1_Click(object sender, RoutedEventArgs e)
@@ -42,6 +47,35 @@ namespace ImageStitcher
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 lblPath2.Content = openFileDialog.FileName;
+            }
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                lblSavePath.Content = saveFileDialog.FileName;
+            }
+        }
+
+        private void btnStich_Click(object sender, RoutedEventArgs e)
+        {
+            if((string)lblPath1.Content == string.Empty)
+            {
+                MessageBox.Show("Please choose the first image");
+                return;
+            }
+
+            if ((string)lblPath2.Content == string.Empty)
+            {
+                MessageBox.Show("Please choose the second image");
+                return;
+            }
+
+            if ((string)lblSavePath.Content == string.Empty)
+            {
+                MessageBox.Show("Please choose save location");
+                return;
             }
         }
     }

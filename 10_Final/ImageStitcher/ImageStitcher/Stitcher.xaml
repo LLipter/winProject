@@ -15,10 +15,12 @@
                Name="lblPath1"/>
         <Label Content="" HorizontalAlignment="Left" Margin="197,95,0,0" VerticalAlignment="Top"
                Name="lblPath2"/>
-        <Button Content="Save As" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,136,0,0"
-                Name="btnSave"/>
-        <Label Content="" HorizontalAlignment="Left" Margin="197,130,0,0" VerticalAlignment="Top"
+        <Button Content="Save As" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,143,0,0"
+                Name="btnSave" Click="btnSave_Click"/>
+        <Label Content="" HorizontalAlignment="Left" Margin="197,139,0,0" VerticalAlignment="Top"
                Name="lblSavePath"/>
+        <Button Content="Stitch Together" HorizontalAlignment="Left" VerticalAlignment="Top" Width="137" Margin="170,199,0,0"
+                Name="btnStich" Click="btnStich_Click"/>
 
     </Grid>
 </Window>
