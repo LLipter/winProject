@@ -91,7 +91,7 @@ namespace ImageStitcher
             }
             catch (Exception)
             {
-                MessageBox.Show("No such file");
+                MessageBox.Show("File open error", "Error");
                 return;
             }
             Mat src1Gray = new Mat();

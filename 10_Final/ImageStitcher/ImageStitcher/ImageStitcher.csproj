@@ -71,6 +71,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cropper.cs" />
     <Compile Include="Stitcher.xaml.cs">
       <DependentUpon>Stitcher.xaml</DependentUpon>
     </Compile>
