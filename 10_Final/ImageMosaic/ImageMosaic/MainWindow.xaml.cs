@@ -30,15 +30,14 @@ namespace ImageMosaic
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Mat src1 = new Mat("C:\\Users\\99645\\Desktop\\11.jpg", ImreadModes.GrayScale);
-            Mat src2 = new Mat("C:\\Users\\99645\\Desktop\\22.jpg", ImreadModes.GrayScale);
-            /*
-            using (new OpenCvSharp.Window("1", src1))
-            using (new OpenCvSharp.Window("2", src2))
-            {
-                Cv2.WaitKey();
-            }
-            */
+            string path1 = "C:\\Users\\99645\\Desktop\\1.jpg";
+            string path2 = "C:\\Users\\99645\\Desktop\\2.jpg";
+            Mat src1Color = new Mat(path1, ImreadModes.Color);
+            Mat src2Color = new Mat(path2, ImreadModes.Color);
+            Mat src1Gray = new Mat();
+            Mat src2Gray = new Mat();
+            Cv2.CvtColor(src1Color, src1Gray, ColorConversionCodes.BGR2GRAY);
+            Cv2.CvtColor(src2Color, src2Gray, ColorConversionCodes.BGR2GRAY);
 
             // Setting hyperparameters
             int numBestMatch = 100;
@@ -48,8 +47,8 @@ namespace ImageMosaic
             KeyPoint[] keypoints1, keypoints2;
             MatOfFloat descriptors1 = new MatOfFloat();
             MatOfFloat descriptors2 = new MatOfFloat();
-            sift.DetectAndCompute(src1, null, out keypoints1, descriptors1);
-            sift.DetectAndCompute(src2, null, out keypoints2, descriptors2);
+            sift.DetectAndCompute(src1Gray, null, out keypoints1, descriptors1);
+            sift.DetectAndCompute(src2Gray, null, out keypoints2, descriptors2);
 
             // Matching descriptor vectors with a brute force matcher
             BFMatcher matcher = new BFMatcher();
@@ -90,20 +89,26 @@ namespace ImageMosaic
             // The size of such matrix is 3x3, which can represents enery possible matrix transformation in 2-D plane.
             Mat homo = Cv2.FindHomography(InputArray.Create<Point2f>(imagePoints2), InputArray.Create<Point2f>(imagePoints1));
 
-            
+            // calculate the transformed position of the second image's right bottom conor
+            // use this value to calculate the size of result image
+            Mat rightBottomConor = new Mat(3, 1, MatType.CV_64FC1);
+            rightBottomConor.Set<double>(0, 0, src2Gray.Cols);
+            rightBottomConor.Set<double>(1, 0, src2Gray.Rows);
+            rightBottomConor.Set<double>(2, 0, 1);
+            Mat transformedConor = homo * rightBottomConor;
+            // ??????
+            // Why transformedConor.Get<double>(2, 0) is not 1 ????
+            Point2d transformedPoint = new Point2d(transformedConor.Get<double>(0, 0) / transformedConor.Get<double>(2, 0),
+                                                    transformedConor.Get<double>(0, 1) / transformedConor.Get<double>(2, 0));
+            OpenCvSharp.Size resultSize = new OpenCvSharp.Size(Math.Max(src1Gray.Cols, transformedPoint.X), Math.Max(src1Gray.Rows, transformedPoint.Y));
+
+
             Mat result = new Mat();
-            //OpenCvSharp.Size resultSize = new OpenCvSharp.Size()
-            Cv2.WarpPerspective(src2, result, homo, new OpenCvSharp.Size(2 * src2.Cols, src2.Rows));
-            result.SaveImage("C:\\Users\\99645\\Desktop\\result11.jpg");
-            src1.CopyTo( new Mat(result, new OpenCvSharp.Rect(0, 0, src1.Cols, src1.Rows)));
-            result.SaveImage("C:\\Users\\99645\\Desktop\\result12.jpg");
+            Cv2.WarpPerspective(src2Color, result, homo, resultSize);
+            src1Color.CopyTo(new Mat(result, new OpenCvSharp.Rect(0, 0, src1Gray.Cols, src1Gray.Rows)));
+            result.SaveImage("C:\\Users\\99645\\Desktop\\result5.jpg");
 
-
-
-
-
-
-
+            MessageBox.Show("ok");
         }
     }
 }
