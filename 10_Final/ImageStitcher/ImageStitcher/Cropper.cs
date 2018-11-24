@@ -42,7 +42,6 @@ namespace ImageStitcher
 
         private void trackbarCallback(int pos, object data)
         {
-            Console.WriteLine(pos);
             if (pos == 0)
                 return;
             double factor = (double)pos / 100;

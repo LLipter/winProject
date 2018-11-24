@@ -72,17 +72,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Cropper.cs" />
-    <Compile Include="CropperWindow.xaml.cs">
-      <DependentUpon>CropperWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Stitcher.cs" />
     <Compile Include="StitcherWindow.xaml.cs">
       <DependentUpon>StitcherWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="CropperWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>

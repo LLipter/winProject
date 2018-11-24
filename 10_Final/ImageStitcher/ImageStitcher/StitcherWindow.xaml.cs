@@ -116,11 +116,11 @@ namespace ImageStitcher
             }
 
             Stitcher stitcher = new Stitcher(firstImage, secondImage);
-            this.Hide();
+            this.IsEnabled = false;
             resultImage = stitcher.stitch();
             imgResult.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(resultImage);
-            lblSizeResult.Content = string.Format("{0} x {1}", imgResult.Width, imgResult.Height);
-            this.Show();
+            lblSizeResult.Content = string.Format("{0} x {1}", resultImage.Width, resultImage.Height);
+            this.IsEnabled = true;
 
         }
 
@@ -133,11 +133,11 @@ namespace ImageStitcher
             }
 
             Cropper cropper = new Cropper(firstImage);
-            this.Hide();
+            this.IsEnabled = false;
             firstImage = cropper.Show();
             imgImage1.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(firstImage);
             lblSize1.Content = string.Format("{0} x {1}", firstImage.Width, firstImage.Height);
-            this.Show();
+            this.IsEnabled = true;
         }
 
         private void btnCrop2_Click(object sender, RoutedEventArgs e)
@@ -149,11 +149,11 @@ namespace ImageStitcher
             }
 
             Cropper cropper = new Cropper(secondImage);
-            this.Hide();
+            this.IsEnabled = false;
             secondImage = cropper.Show();
             imgImage2.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(secondImage);
             lblSize2.Content = string.Format("{0} x {1}", secondImage.Width, secondImage.Height);
-            this.Show();
+            this.IsEnabled = true;
         }
 
         private void btnCropResult_Click(object sender, RoutedEventArgs e)
@@ -165,11 +165,11 @@ namespace ImageStitcher
             }
 
             Cropper cropper = new Cropper(resultImage);
-            this.Hide();
+            this.IsEnabled = false;
             resultImage = cropper.Show();
             imgResult.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(resultImage);
-            lblSizeResult.Content = string.Format("{0} x {1}", imgResult.Width, imgResult.Height);
-            this.Show();
+            lblSizeResult.Content = string.Format("{0} x {1}", resultImage.Width, resultImage.Height);
+            this.IsEnabled = true;
         }
 
         private void btnSave1_Click(object sender, RoutedEventArgs e)
