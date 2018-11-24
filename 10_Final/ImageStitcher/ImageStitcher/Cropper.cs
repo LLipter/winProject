@@ -9,8 +9,8 @@ namespace ImageStitcher
 {
     class Cropper
     {
+        private Mat baseImage;
         private Mat srcImage;
-        private Mat zoomBaseImage;
         private Mat currentImage = new Mat();
         private OpenCvSharp.Window CroppingWindow;
         private bool down = false;
@@ -22,7 +22,7 @@ namespace ImageStitcher
         public Cropper(Mat image)
         {
             this.srcImage = image;
-            this.zoomBaseImage = this.srcImage.Clone();
+            this.baseImage = this.srcImage.Clone();
         }
 
         public Mat Show()
@@ -42,7 +42,12 @@ namespace ImageStitcher
 
         private void trackbarCallback(int pos, object data)
         {
-           // srcImage.Resize()
+            Console.WriteLine(pos);
+            if (pos == 0)
+                return;
+            double factor = (double)pos / 100;
+            srcImage = baseImage.Resize(new Size(0,0), factor, factor);
+            CroppingWindow.ShowImage(srcImage);
         }
 
         private void mouseCallback(MouseEvent e, int x, int y, MouseEvent args, IntPtr data)
@@ -101,7 +106,7 @@ namespace ImageStitcher
                 // Make an image out of just the selected ROI and display it in a new window
                 Mat croppedImage = new Mat(srcImage, box);
                 srcImage = croppedImage;
-                zoomBaseImage = srcImage.Clone();
+                baseImage = srcImage.Clone();
                 CroppingWindow.ShowImage(srcImage);
             }
         }
