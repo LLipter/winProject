@@ -39,7 +39,7 @@ namespace ImageStitcher
             saveFileDialog.FilterIndex = 0;
         }
 
-        private void btnChooseImage1_Click(object sender, RoutedEventArgs e)
+        private void btnLoadImage1_Click(object sender, RoutedEventArgs e)
         {
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -57,7 +57,7 @@ namespace ImageStitcher
             }
         }
 
-        private void btnChooseImage2_Click(object sender, RoutedEventArgs e)
+        private void btnLoadImage2_Click(object sender, RoutedEventArgs e)
         {
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -75,7 +75,7 @@ namespace ImageStitcher
             }
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void btnSaveResult_Click(object sender, RoutedEventArgs e)
         {
             if(resultImage == null)
             {
@@ -121,6 +121,95 @@ namespace ImageStitcher
 
         }
 
+        private void btnCrop1_Click(object sender, RoutedEventArgs e)
+        {
+            if (firstImage == null)
+            {
+                MessageBox.Show("Please load the first image", "Error");
+                return;
+            }
 
+            Cropper cropper = new Cropper(firstImage);
+            this.Hide();
+            firstImage = cropper.Show();
+            imgImage1.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(firstImage);
+            this.Show();
+        }
+
+        private void btnCrop2_Click(object sender, RoutedEventArgs e)
+        {
+            if (secondImage == null)
+            {
+                MessageBox.Show("Please load the second image", "Error");
+                return;
+            }
+
+            Cropper cropper = new Cropper(secondImage);
+            this.Hide();
+            secondImage = cropper.Show();
+            imgImage2.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(secondImage);
+            this.Show();
+        }
+
+        private void btnCropResult_Click(object sender, RoutedEventArgs e)
+        {
+            if (resultImage == null)
+            {
+                MessageBox.Show("Please stitch images first", "Error");
+                return;
+            }
+
+            Cropper cropper = new Cropper(resultImage);
+            this.Hide();
+            resultImage = cropper.Show();
+            imgResult.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(resultImage);
+            this.Show();
+        }
+
+        private void btnSave1_Click(object sender, RoutedEventArgs e)
+        {
+            if (firstImage == null)
+            {
+                MessageBox.Show("Please load the first image", "Error");
+                return;
+            }
+
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    firstImage.SaveImage(saveFileDialog.FileName);
+                    saveFileDialog.FileName = "";
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Image write error", "Error");
+                    return;
+                }
+            }
+        }
+
+        private void btnSave2_Click(object sender, RoutedEventArgs e)
+        {
+            if (secondImage == null)
+            {
+                MessageBox.Show("Please load the second image", "Error");
+                return;
+            }
+
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    secondImage.SaveImage(saveFileDialog.FileName);
+                    saveFileDialog.FileName = "";
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Image write error", "Error");
+                    return;
+                }
+            }
+        }
     }
 }

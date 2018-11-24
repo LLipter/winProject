@@ -5,26 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageStitcher"
         mc:Ignorable="d"
-        Title="Stitcher" Height="851.2" Width="703.467" ResizeMode="NoResize">
+        Title="Image Stitcher" Height="561.6" Width="1458.667" ResizeMode="NoResize">
     <Grid>
-        <Separator HorizontalAlignment="Left" Height="100" Margin="10,475,0,0" VerticalAlignment="Top" Width="677"/>
 
         <Separator HorizontalAlignment="Left" Height="100" Margin="10,226,0,0" VerticalAlignment="Top" Width="677"/>
 
-        <Button Content="Choose First Image" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,53,0,0"
-                x:Name="btnChooseImage1" Click="btnChooseImage1_Click"/>
-        <Button Content="Choose Second Image" HorizontalAlignment="Left" Margin="22,300,0,0" VerticalAlignment="Top" Width="139"
-                x:Name="btnChooseImage2" Click="btnChooseImage2_Click"/>
-        <Button Content="Save As" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="272,776,0,0"
-                x:Name="btnSave" Click="btnSave_Click"/>
-        <Button Content="Stitch Together" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,549,0,0"
+        <Button Content="Load First Image" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,53,0,0"
+                x:Name="btnLoadImage1" Click="btnLoadImage1_Click"/>
+        <Button Content="Load Second Image" HorizontalAlignment="Left" Margin="22,300,0,0" VerticalAlignment="Top" Width="139"
+                x:Name="btnLoadImage2" Click="btnLoadImage2_Click"/>
+        <Button Content="Save As" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="1034,456,0,0"
+                x:Name="btnSaveResult" Click="btnSaveResult_Click"/>
+        <Button Content="Stitch Together" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="752,53,0,0"
                 x:Name="btnStich" Click="btnStich_Click"/>
         <Image HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="490" Margin="197,53,0,0"
                Name="imgImage1"/>
         <Image HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="490" Margin="197,300,0,0"
                Name="imgImage2"/>
-        <Image HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="490" Margin="197,549,0,0"
+        <Image HorizontalAlignment="Left" Height="368" VerticalAlignment="Top" Width="490" Margin="926,53,0,0"
                Name="imgResult"/>
+        <Separator HorizontalAlignment="Left" Height="296" Margin="483,117,0,0" VerticalAlignment="Top" Width="474" RenderTransformOrigin="0.5,0.5">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <Button Content="Crop Image" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,96,0,0"
+                Name="btnCrop1" Click="btnCrop1_Click"/>
+        <Button Content="Crop Image" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,339,0,0"
+                Name="btnCrop2" Click="btnCrop2_Click"/>
+        <Button Content="Crop Image" HorizontalAlignment="Left" Margin="752,96,0,0" VerticalAlignment="Top" Width="139"
+                Name="btnCropResult" Click="btnCropResult_Click"/>
+        <Button Content="Save As" HorizontalAlignment="Left" Margin="22,212,0,0" VerticalAlignment="Top" Width="139"
+                Name="btnSave1" Click="btnSave1_Click"/>
+        <Button Content="Save As" HorizontalAlignment="Left" Margin="22,461,0,0" VerticalAlignment="Top" Width="139"
+                Name="btnSave2" Click="btnSave2_Click"/>
 
     </Grid>
 </Window>
