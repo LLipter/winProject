@@ -5,22 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageStitcher"
         mc:Ignorable="d"
-        Title="Stitcher" Height="300" Width="502.667" ResizeMode="NoResize">
+        Title="Stitcher" Height="851.2" Width="703.467" ResizeMode="NoResize">
     <Grid>
+        <Separator HorizontalAlignment="Left" Height="100" Margin="10,475,0,0" VerticalAlignment="Top" Width="677"/>
+
+        <Separator HorizontalAlignment="Left" Height="100" Margin="10,226,0,0" VerticalAlignment="Top" Width="677"/>
+
         <Button Content="Choose First Image" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,53,0,0"
-                Name="btnChooseImage1" Click="btnChooseImage1_Click"/>
-        <Button Content="Choose Second Image" HorizontalAlignment="Left" Margin="22,98,0,0" VerticalAlignment="Top" Width="139"
-                Name="btnChooseImage2" Click="btnChooseImage2_Click"/>
-        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="197,53,0,0"
-               Name="lblPath1" Width="270"/>
-        <Label Content="" HorizontalAlignment="Left" Margin="197,95,0,0" VerticalAlignment="Top"
-               Name="lblPath2" Width="270"/>
-        <Button Content="Save As" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,143,0,0"
-                Name="btnSave" Click="btnSave_Click"/>
-        <Label Content="" HorizontalAlignment="Left" Margin="197,139,0,0" VerticalAlignment="Top"
-               Name="lblSavePath" Width="270"/>
-        <Button Content="Stitch Together" HorizontalAlignment="Left" VerticalAlignment="Top" Width="137" Margin="170,199,0,0"
-                Name="btnStich" Click="btnStich_Click"/>
+                x:Name="btnChooseImage1" Click="btnChooseImage1_Click"/>
+        <Button Content="Choose Second Image" HorizontalAlignment="Left" Margin="22,300,0,0" VerticalAlignment="Top" Width="139"
+                x:Name="btnChooseImage2" Click="btnChooseImage2_Click"/>
+        <Button Content="Save As" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="272,776,0,0"
+                x:Name="btnSave" Click="btnSave_Click"/>
+        <Button Content="Stitch Together" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="22,549,0,0"
+                x:Name="btnStich" Click="btnStich_Click"/>
+        <Image HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="490" Margin="197,53,0,0"
+               Name="imgImage1"/>
+        <Image HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="490" Margin="197,300,0,0"
+               Name="imgImage2"/>
+        <Image HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="490" Margin="197,549,0,0"
+               Name="imgResult"/>
 
     </Grid>
 </Window>
