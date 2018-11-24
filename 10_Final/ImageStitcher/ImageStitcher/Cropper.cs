@@ -9,8 +9,8 @@ namespace ImageStitcher
 {
     class Cropper
     {
-        private string imagePath;
         private Mat srcImage;
+        private Mat zoomBaseImage;
         private Mat currentImage = new Mat();
         private OpenCvSharp.Window CroppingWindow;
         private bool down = false;
@@ -19,23 +19,30 @@ namespace ImageStitcher
         private OpenCvSharp.Point conor2 = new OpenCvSharp.Point();
         private OpenCvSharp.Rect box = new OpenCvSharp.Rect();
 
-        public Cropper(string imagePath)
+        public Cropper(Mat image)
         {
-            this.imagePath = imagePath;
+            this.srcImage = image;
+            this.zoomBaseImage = this.srcImage.Clone();
         }
 
         public Mat Show()
         {
-            srcImage = new Mat(imagePath);
-            using (CroppingWindow = new OpenCvSharp.Window("Cropping", WindowMode.AutoSize, srcImage))
+            using (CroppingWindow = new OpenCvSharp.Window("Cropper", WindowMode.AutoSize, srcImage))
             {
 
                 CvMouseCallback onMouse = new CvMouseCallback(mouseCallback);
                 CroppingWindow.SetMouseCallback(onMouse);
+                CvTrackbarCallback2 onZoom = new CvTrackbarCallback2(trackbarCallback);
+                CvTrackbar zoom = CroppingWindow.CreateTrackbar2("Zoom", 100, 200, onZoom, null);
                 Cv2.WaitKey();
             }
             // seems that srcImage will be released by GC, so I must return a copy of it
             return srcImage.Clone();
+        }
+
+        private void trackbarCallback(int pos, object data)
+        {
+           // srcImage.Resize()
         }
 
         private void mouseCallback(MouseEvent e, int x, int y, MouseEvent args, IntPtr data)
@@ -94,6 +101,7 @@ namespace ImageStitcher
                 // Make an image out of just the selected ROI and display it in a new window
                 Mat croppedImage = new Mat(srcImage, box);
                 srcImage = croppedImage;
+                zoomBaseImage = srcImage.Clone();
                 CroppingWindow.ShowImage(srcImage);
             }
         }

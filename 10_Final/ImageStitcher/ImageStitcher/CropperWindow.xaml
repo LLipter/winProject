@@ -7,16 +7,17 @@
         mc:Ignorable="d"
         Title="Cropper" Height="300" Width="463.077" ResizeMode="NoResize">
     <Grid>
-        <Button Content="Choose File" HorizontalAlignment="Left" VerticalAlignment="Top" Width="99" Margin="27,36,0,0"
+        <Button Content="Load Image" HorizontalAlignment="Left" VerticalAlignment="Top" Width="99" Margin="27,36,0,0"
                 Name="btnChooseFile" Click="btnChooseFile_Click"/>
         <Button Content="Save As" HorizontalAlignment="Left" VerticalAlignment="Top" Width="99" Margin="27,176,0,0"
             x:Name="btnSavePath" Click="btnSavePath_Click"/>
-        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="168,33,0,0" Width="263"
-               Name="lblFilePath"/>
         <Button Content="Crop" HorizontalAlignment="Left" VerticalAlignment="Top" Width="99" Margin="27,75,0,0"
                 Name="btnCrop" Click="btnCrop_Click"/>
-        <Image HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="263" Margin="168,75,0,0"
+        <Image HorizontalAlignment="Left" Height="199" VerticalAlignment="Top" Width="280" Margin="150,36,0,0"
                Name="imgPreview"/>
+        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="27,122,0,0" Width="99"
+               Name="lblSize"
+               HorizontalContentAlignment="Center"/>
 
     </Grid>
 </Window>

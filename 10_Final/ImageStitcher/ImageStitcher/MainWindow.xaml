@@ -9,7 +9,7 @@
     <Grid>
         <Button Content="Stitcher" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="114,81,0,0"
                 Name="btnStitcher" Click="btnStitcher_Click"/>
-        <Button Content="Cropper" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="114,148,0,0"
+        <Button Content="Cropper" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="114,123,0,0"
                 Name="btnCropper" Click="btnCropper_Click"/>
 
     </Grid>

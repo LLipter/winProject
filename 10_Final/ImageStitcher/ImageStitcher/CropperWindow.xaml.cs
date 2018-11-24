@@ -23,7 +23,9 @@ namespace ImageStitcher
 
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private Mat image = null;
         private Mat croppedImage = null;
+        Cropper cropper = null;
 
         public CropperWindow()
         {
@@ -41,8 +43,20 @@ namespace ImageStitcher
         {
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                lblFilePath.Content = openFileDialog.FileName;
-                openFileDialog.FileName = "";
+                try
+                {
+                    image = new Mat(openFileDialog.FileName);
+                    croppedImage = image;
+                    cropper = new Cropper(image);
+                    openFileDialog.FileName = "";
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Image open error", "Error");
+                    return;
+                }
+                imgPreview.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(image);
+                lblSize.Content = string.Format("{0} x {1}", image.Width, image.Height);
             }
         }
 
@@ -50,39 +64,39 @@ namespace ImageStitcher
         {
             if (croppedImage == null)
             {
-                MessageBox.Show("Please crop image first", "Error");
+                MessageBox.Show("Please load image first", "Error");
                 return;
             }
 
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                croppedImage.SaveImage(saveFileDialog.FileName);
-                saveFileDialog.FileName = "";
+                try
+                {
+                    croppedImage.SaveImage(saveFileDialog.FileName);
+                    saveFileDialog.FileName = "";
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Image write error", "Error");
+                    return;
+                }
+                MessageBox.Show("ok", "Save Result");
             }
-
-            MessageBox.Show("ok", "Save Result");
+            
         }
 
         private void btnCrop_Click(object sender, RoutedEventArgs e)
         {
-            if((string)lblFilePath.Content == string.Empty)
+            if(image == null)
             {
-                MessageBox.Show("Please choose image first", "Error");
+                MessageBox.Show("Please load image first", "Error");
                 return;
             }
-
-            Cropper cropper = new Cropper((string)lblFilePath.Content);
-            try
-            {
-                croppedImage = cropper.Show();
-            }
-            catch(Exception )
-            {
-                MessageBox.Show("File open error", "Error");
-                return;
-            }
-
+            this.IsEnabled = false;
+            croppedImage = cropper.Show();
+            this.IsEnabled = true;
             imgPreview.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(croppedImage);
+            lblSize.Content = string.Format("{0} x {1}", croppedImage.Width, croppedImage.Height);
         }
     }
 }
