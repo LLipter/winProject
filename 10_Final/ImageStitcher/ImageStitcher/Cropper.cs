@@ -25,9 +25,9 @@ namespace ImageStitcher
             this.baseImage = this.srcImage.Clone();
         }
 
-        public Mat Show()
+        public Mat Crop()
         {
-            using (CroppingWindow = new OpenCvSharp.Window("Cropper", WindowMode.AutoSize, srcImage))
+            using (CroppingWindow = new OpenCvSharp.Window("Cropper", WindowMode.FullScreen, srcImage))
             {
 
                 CvMouseCallback onMouse = new CvMouseCallback(mouseCallback);

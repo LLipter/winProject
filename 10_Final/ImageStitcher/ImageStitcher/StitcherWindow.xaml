@@ -50,6 +50,10 @@
             x:Name="lblSize2" HorizontalContentAlignment="Center"/>
         <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="752,138,0,0" Width="139"
             x:Name="lblSizeResult" HorizontalContentAlignment="Center"/>
+        <Button Content="Show Tutorials" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="191,10,0,0"
+                Name="btnTutorials" Click="btnTutorials_Click"/>
+        <Button Content="Show Demos" HorizontalAlignment="Left" Margin="426,10,0,0" VerticalAlignment="Top" Width="106"
+                Name="btnDemo" Click="btnDemo_Click"/>
 
     </Grid>
 </Window>

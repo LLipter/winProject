@@ -1,0 +1,34 @@
+﻿<Window x:Class="ImageStitcher.DemoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageStitcher"
+        mc:Ignorable="d"
+        Title="Demo Window" Height="599.4" Width="570">
+    <Grid>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="58,46,0,0" Source="Resources/1-1.png"/>
+        <Label Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,84,0,0"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="241,46,0,0" Source="Resources/1-2.png"/>
+        <Label Content="=" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="376,84,0,0"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="430,46,0,0" Source="Resources/1-3.png"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="58,167,0,0" Source="Resources/2-1.png"/>
+        <Label Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,205,0,0"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="241,167,0,0" Source="Resources/2-2.png"/>
+        <Label Content="=" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="376,205,0,0"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="430,167,0,0" Source="Resources/2-3.png"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="58,288,0,0" Source="Resources/3-1.jpg"/>
+        <Label Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,326,0,0"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="241,288,0,0" Source="Resources/3-2.jpg"/>
+        <Label Content="=" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="376,326,0,0"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="430,288,0,0" Source="Resources/3-3.jpg"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="58,409,0,0" Source="Resources/4-1.jpg"/>
+        <Label Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,447,0,0"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="241,409,0,0" Source="Resources/4-2.jpg"/>
+        <Label Content="=" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="376,447,0,0"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="430,409,0,0" Source="Resources/4-3.jpg"/>
+        <Button Content="Download These Demo Images" HorizontalAlignment="Left" VerticalAlignment="Top" Width="203" Margin="176,534,0,0"
+                Name="btnDownload" Click="btnDownload_Click"/>
+
+    </Grid>
+</Window>

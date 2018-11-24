@@ -19,7 +19,7 @@ namespace ImageStitcher
             this.src2Color = src2Color;
         }
 
-        public Mat stitch()
+        public Mat Stitch()
         {
             Mat src1Gray = new Mat();
             Mat src2Gray = new Mat();

@@ -117,7 +117,7 @@ namespace ImageStitcher
 
             Stitcher stitcher = new Stitcher(firstImage, secondImage);
             this.IsEnabled = false;
-            resultImage = stitcher.stitch();
+            resultImage = stitcher.Stitch();
             imgResult.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(resultImage);
             lblSizeResult.Content = string.Format("{0} x {1}", resultImage.Width, resultImage.Height);
             this.IsEnabled = true;
@@ -134,7 +134,7 @@ namespace ImageStitcher
 
             Cropper cropper = new Cropper(firstImage);
             this.IsEnabled = false;
-            firstImage = cropper.Show();
+            firstImage = cropper.Crop();
             imgImage1.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(firstImage);
             lblSize1.Content = string.Format("{0} x {1}", firstImage.Width, firstImage.Height);
             this.IsEnabled = true;
@@ -150,7 +150,7 @@ namespace ImageStitcher
 
             Cropper cropper = new Cropper(secondImage);
             this.IsEnabled = false;
-            secondImage = cropper.Show();
+            secondImage = cropper.Crop();
             imgImage2.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(secondImage);
             lblSize2.Content = string.Format("{0} x {1}", secondImage.Width, secondImage.Height);
             this.IsEnabled = true;
@@ -166,7 +166,7 @@ namespace ImageStitcher
 
             Cropper cropper = new Cropper(resultImage);
             this.IsEnabled = false;
-            resultImage = cropper.Show();
+            resultImage = cropper.Crop();
             imgResult.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(resultImage);
             lblSizeResult.Content = string.Format("{0} x {1}", resultImage.Width, resultImage.Height);
             this.IsEnabled = true;
@@ -218,6 +218,18 @@ namespace ImageStitcher
                 }
                 MessageBox.Show("ok", "Save Result");
             }
+        }
+
+        private void btnTutorials_Click(object sender, RoutedEventArgs e)
+        {
+            TutorialsWindow tutorialsWindow = new TutorialsWindow();
+            tutorialsWindow.Show();
+        }
+
+        private void btnDemo_Click(object sender, RoutedEventArgs e)
+        {
+            DemoWindow demoWindow = new DemoWindow();
+            demoWindow.Show();
         }
     }
 }
