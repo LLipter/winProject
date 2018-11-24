@@ -51,6 +51,9 @@ namespace ImageStitcher
                     SaveResourceTo("5-1.jpg", folderBrowserDialog.SelectedPath);
                     SaveResourceTo("5-2.jpg", folderBrowserDialog.SelectedPath);
                     SaveResourceTo("5-3.jpg", folderBrowserDialog.SelectedPath);
+                    SaveResourceTo("6-1.jpg", folderBrowserDialog.SelectedPath);
+                    SaveResourceTo("6-2.jpg", folderBrowserDialog.SelectedPath);
+                    SaveResourceTo("6-3.jpg", folderBrowserDialog.SelectedPath);
                     MessageBox.Show("ok", "Save Result");
                 }
                 catch(Exception ex)
