@@ -27,6 +27,7 @@ namespace ImageStitcher
         {
             InitializeComponent();
             folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            folderBrowserDialog.Description = "Choose the directory you want to save these images";
         }
 
         private void btnDownload_Click(object sender, RoutedEventArgs e)
@@ -47,6 +48,9 @@ namespace ImageStitcher
                     SaveResourceTo("4-1.jpg", folderBrowserDialog.SelectedPath);
                     SaveResourceTo("4-2.jpg", folderBrowserDialog.SelectedPath);
                     SaveResourceTo("4-3.jpg", folderBrowserDialog.SelectedPath);
+                    SaveResourceTo("5-1.jpg", folderBrowserDialog.SelectedPath);
+                    SaveResourceTo("5-2.jpg", folderBrowserDialog.SelectedPath);
+                    SaveResourceTo("5-3.jpg", folderBrowserDialog.SelectedPath);
                     MessageBox.Show("ok", "Save Result");
                 }
                 catch(Exception ex)

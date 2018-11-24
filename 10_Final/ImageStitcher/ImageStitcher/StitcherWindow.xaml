@@ -19,11 +19,11 @@
         <Button Content="Stitch Together" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="752,53,0,0"
                 x:Name="btnStich" Click="btnStich_Click"/>
         <Image HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="490" Margin="197,53,0,0"
-               Name="imgImage1"/>
+               Name="imgImage1" Source="Resources/first.png"/>
         <Image HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="490" Margin="197,300,0,0"
-               Name="imgImage2"/>
+               Name="imgImage2" Source="Resources/second.png"/>
         <Image HorizontalAlignment="Left" Height="447" VerticalAlignment="Top" Width="490" Margin="926,53,0,0"
-               Name="imgResult"/>
+               Name="imgResult" Source="Resources/result.png"/>
         <Separator HorizontalAlignment="Left" Height="296" Margin="483,117,0,0" VerticalAlignment="Top" Width="474" RenderTransformOrigin="0.5,0.5">
             <Separator.RenderTransform>
                 <TransformGroup>

@@ -35,6 +35,14 @@ namespace ImageStitcher
                 CvTrackbarCallback2 onZoom = new CvTrackbarCallback2(trackbarCallback);
                 CvTrackbar zoom = CroppingWindow.CreateTrackbar2("Zoom", 100, 200, onZoom, null);
                 Cv2.WaitKey();
+
+                // This line is very important
+                // OpenCV is written in C++, which means it's unmanaged.
+                // So when a delegate callback variable is passed to it as a function point,
+                // GC in C# can no longer identify the life cycle of this delegate variable
+                // It's our reponsebility to make sure GC in C# will not collect it when it's still in use.
+                // Otherwise an exception will be thrown.
+                GC.KeepAlive(onMouse);
             }
             // seems that srcImage will be released by GC, so I must return a copy of it
             return srcImage.Clone();

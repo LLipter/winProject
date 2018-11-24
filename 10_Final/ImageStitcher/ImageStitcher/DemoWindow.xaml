@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageStitcher"
         mc:Ignorable="d"
-        Title="Demo Window" Height="599.4" Width="570" ResizeMode="NoResize">
+        Title="Demo Window" Height="727.8" Width="570" ResizeMode="NoResize">
     <Grid>
         <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="58,46,0,0" Source="Resources/1-1.png"/>
         <Label Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,84,0,0"/>
@@ -27,8 +27,13 @@
         <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="241,409,0,0" Source="Resources/4-2.jpg"/>
         <Label Content="=" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="376,447,0,0"/>
         <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="430,409,0,0" Source="Resources/4-3.jpg"/>
-        <Button Content="Download These Demo Images" HorizontalAlignment="Left" VerticalAlignment="Top" Width="203" Margin="176,532,0,0"
+        <Button Content="Download These Demo Images" HorizontalAlignment="Left" VerticalAlignment="Top" Width="203" Margin="178,652,0,0"
                 Name="btnDownload" Click="btnDownload_Click"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="58,539,0,0" Source="Resources/5-1.jpg"/>
+        <Label Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,577,0,0"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="241,539,0,0" Source="Resources/5-2.jpg"/>
+        <Label Content="=" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="376,577,0,0"/>
+        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="430,539,0,0" Source="Resources/5-3.jpg"/>
 
     </Grid>
 </Window>

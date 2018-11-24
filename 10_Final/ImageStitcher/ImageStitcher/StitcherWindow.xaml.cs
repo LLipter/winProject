@@ -135,7 +135,6 @@ namespace ImageStitcher
             Cropper cropper = new Cropper(firstImage);
             this.IsEnabled = false;
             firstImage = cropper.Crop();
-            GC.KeepAlive(cropper);
             imgImage1.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(firstImage);
             lblSize1.Content = string.Format("{0} x {1}", firstImage.Width, firstImage.Height);
             this.IsEnabled = true;
@@ -152,7 +151,6 @@ namespace ImageStitcher
             Cropper cropper = new Cropper(secondImage);
             this.IsEnabled = false;
             secondImage = cropper.Crop();
-            GC.KeepAlive(cropper);
             imgImage2.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(secondImage);
             lblSize2.Content = string.Format("{0} x {1}", secondImage.Width, secondImage.Height);
             this.IsEnabled = true;
@@ -169,7 +167,6 @@ namespace ImageStitcher
             Cropper cropper = new Cropper(resultImage);
             this.IsEnabled = false;
             resultImage = cropper.Crop();
-            GC.KeepAlive(cropper);
             imgResult.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(resultImage);
             lblSizeResult.Content = string.Format("{0} x {1}", resultImage.Width, resultImage.Height);
             this.IsEnabled = true;
