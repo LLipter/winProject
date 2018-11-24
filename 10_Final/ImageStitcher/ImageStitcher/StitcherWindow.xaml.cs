@@ -54,6 +54,7 @@ namespace ImageStitcher
                     return;
                 }
                 imgImage1.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(firstImage);
+                lblSize1.Content = string.Format("{0} x {1}", firstImage.Width, firstImage.Height);
             }
         }
 
@@ -72,6 +73,7 @@ namespace ImageStitcher
                     return;
                 }
                 imgImage2.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(secondImage);
+                lblSize2.Content = string.Format("{0} x {1}", secondImage.Width, secondImage.Height);
             }
         }
 
@@ -95,6 +97,7 @@ namespace ImageStitcher
                     MessageBox.Show("Image write error", "Error");
                     return;
                 }
+                MessageBox.Show("ok", "Save Result");
             }
         }
 
@@ -112,12 +115,12 @@ namespace ImageStitcher
                 return;
             }
 
-
             Stitcher stitcher = new Stitcher(firstImage, secondImage);
-            this.IsEnabled = false;
+            this.Hide();
             resultImage = stitcher.stitch();
             imgResult.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(resultImage);
-            this.IsEnabled = true;
+            lblSizeResult.Content = string.Format("{0} x {1}", imgResult.Width, imgResult.Height);
+            this.Show();
 
         }
 
@@ -133,6 +136,7 @@ namespace ImageStitcher
             this.Hide();
             firstImage = cropper.Show();
             imgImage1.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(firstImage);
+            lblSize1.Content = string.Format("{0} x {1}", firstImage.Width, firstImage.Height);
             this.Show();
         }
 
@@ -148,6 +152,7 @@ namespace ImageStitcher
             this.Hide();
             secondImage = cropper.Show();
             imgImage2.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(secondImage);
+            lblSize2.Content = string.Format("{0} x {1}", secondImage.Width, secondImage.Height);
             this.Show();
         }
 
@@ -163,6 +168,7 @@ namespace ImageStitcher
             this.Hide();
             resultImage = cropper.Show();
             imgResult.Source = OpenCvSharp.Extensions.BitmapSourceConverter.ToBitmapSource(resultImage);
+            lblSizeResult.Content = string.Format("{0} x {1}", imgResult.Width, imgResult.Height);
             this.Show();
         }
 
@@ -186,6 +192,7 @@ namespace ImageStitcher
                     MessageBox.Show("Image write error", "Error");
                     return;
                 }
+                MessageBox.Show("ok", "Save Result");
             }
         }
 
@@ -209,6 +216,7 @@ namespace ImageStitcher
                     MessageBox.Show("Image write error", "Error");
                     return;
                 }
+                MessageBox.Show("ok", "Save Result");
             }
         }
     }

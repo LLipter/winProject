@@ -44,6 +44,12 @@
                 Name="btnSave1" Click="btnSave1_Click"/>
         <Button Content="Save As" HorizontalAlignment="Left" Margin="22,461,0,0" VerticalAlignment="Top" Width="139"
                 Name="btnSave2" Click="btnSave2_Click"/>
+        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,138,0,0" Width="139"
+               Name="lblSize1" HorizontalContentAlignment="Center"/>
+        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,379,0,0" Width="139"
+            x:Name="lblSize2" HorizontalContentAlignment="Center"/>
+        <Label Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="752,138,0,0" Width="139"
+            x:Name="lblSizeResult" HorizontalContentAlignment="Center"/>
 
     </Grid>
 </Window>
