@@ -14,7 +14,7 @@
                 x:Name="btnLoadImage1" Click="btnLoadImage1_Click"/>
         <Button Content="Load Second Image" HorizontalAlignment="Left" Margin="22,300,0,0" VerticalAlignment="Top" Width="139"
                 x:Name="btnLoadImage2" Click="btnLoadImage2_Click"/>
-        <Button Content="Save As" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="1034,456,0,0"
+        <Button Content="Save As" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="752,461,0,0"
                 x:Name="btnSaveResult" Click="btnSaveResult_Click"/>
         <Button Content="Stitch Together" HorizontalAlignment="Left" VerticalAlignment="Top" Width="139" Margin="752,53,0,0"
                 x:Name="btnStich" Click="btnStich_Click"/>
@@ -22,7 +22,7 @@
                Name="imgImage1"/>
         <Image HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="490" Margin="197,300,0,0"
                Name="imgImage2"/>
-        <Image HorizontalAlignment="Left" Height="368" VerticalAlignment="Top" Width="490" Margin="926,53,0,0"
+        <Image HorizontalAlignment="Left" Height="447" VerticalAlignment="Top" Width="490" Margin="926,53,0,0"
                Name="imgResult"/>
         <Separator HorizontalAlignment="Left" Height="296" Margin="483,117,0,0" VerticalAlignment="Top" Width="474" RenderTransformOrigin="0.5,0.5">
             <Separator.RenderTransform>
