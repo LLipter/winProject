@@ -79,28 +79,6 @@ namespace ImageStitcher
             // use this value to calculate the size of result image
             Point2f[] transfromedConors = transfromConors(src2Color.Size(), homo);
 
-            // if the second image is on the left or up side of the first image, X or Y coordinate may be negative
-            // exchange them and recompute the homography affine matrix
-            for (int i = 0; i < 4; i++)
-            {
-                if (transfromedConors[i].X < 0 || transfromedConors[i].Y < 0)
-                {
-                    Mat temp;
-                    // exchange colorful source images
-                    temp = src1Color;
-                    src1Color = src2Color;
-                    src2Color = temp;
-                    // exchange gray source images
-                    temp = src1Gray;
-                    src1Gray = src2Gray;
-                    src2Gray = temp;
-                    // recompute affine matrix and transfomed conor location
-                    homo = Cv2.FindHomography(InputArray.Create<Point2f>(imagePoints1), InputArray.Create<Point2f>(imagePoints2));
-                    transfromedConors = transfromConors(src2Color.Size(), homo);
-                    break;
-                }
-            }
-
             // make sure the result image is large enough
             double maxWidth = src1Color.Width;
             double maxHeight = src1Color.Height;
@@ -117,7 +95,6 @@ namespace ImageStitcher
             int src1StartPositonY = 0;
             int src1StartPositonX = 0;
 
-            // double check
             // if still some X coordinate is less than 0, do shift operation along x-axis
             bool shouldShiftX = false;
             double shiftDistanceX = double.MinValue;
@@ -152,8 +129,6 @@ namespace ImageStitcher
                 src1StartPositonX = (int)shiftDistanceX;
             }
 
-
-            // double check
             // if still some Y coordinate is less than 0, do shift operation along y-axis
             bool shouldShiftY = false;
             double shiftDistanceY = double.MinValue;
