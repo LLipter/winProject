@@ -1,6 +1,15 @@
+
+
 # Introduction
 
 This is a simple GUI program based on `C#(WPF)` with `opencv`  dependency. 
+
+
+
+# 程序的依赖
+
+- 这个程序依赖于`OpenCV`中的一些函数，所以如果想要运行程序，需要首先检查您的电脑中是否配置好了`OpenCV`。
+- 因为`OpenCV`是C++库，为了在C#中能够调用，我引用了一个叫`OpencvSharp`的库。这个库就是用C#把`OpenCV`封装了一遍。我利用了`Visual Studio`提供的`NuGet`包管理器来安装这个库。如果您的电脑没有安装过这个库的话，可能会花费一定的时间下载它。
 
 
 
