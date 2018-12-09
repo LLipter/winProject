@@ -215,6 +215,8 @@
             this.Controls.Add(this.txtFileNamePtn);
             this.Controls.Add(this.lblFileNamePtn);
             this.Controls.Add(this.btnChooseDir);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmFileMerger";
             this.Text = "FileMerger";
             this.ResumeLayout(false);
