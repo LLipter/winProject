@@ -144,6 +144,8 @@
             this.Controls.Add(this.txtCHS);
             this.Controls.Add(this.lblCHT);
             this.Controls.Add(this.lblCHS);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmCHSCHTPinYinConv";
             this.Text = "CHSCHTPinYinConv";
             this.ResumeLayout(false);
